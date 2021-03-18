@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="tagbox.js"></script>
+    <link rel="stylesheet" href="tagbox.css">
+
+    <popup id="contact-popup" style="visibility: hidden;">
+        <div>Contact Info:</div>
+        <p style="padding: 1rem; margin: 0">
+            Thank you for using Dungeon Manager!
+            Please feel free to contact with questions
+            and critiques.
+            <br/><br/>
+            Github: <a href="https://github.com/Lcjacobpd/dungeon-manager" style="color: #b9bbbe;">Lcjacobpd/dungeon-manager</a>
+        </p>
+    </popup>
+
+    <popup id="option-popup" style="visibility: hidden;">
+        <div>Project Details:</div>
+        <p style="padding: 1rem; margin: 0">
+            Part of this project relies on
+            <a href="https://github.com/jbt/tagbox" style="color: #b9bbbe;">jbt's Tagbox</a>
+            js implimentation with a modified stylesheet.
+            <br/><br/>
+            This particular style is not so subtly inspired by discord.
+        </p>
+    </popup>
+
+
+    <backdrop>
+        <ribbon>
+            Dungeon Manager
+            <div style="display: flex;">
+                <img src="img/message.svg" onclick="showContacts()">
+                <img src="img/setting.svg" onclick="showOptions()">
+            </div>
+        </ribbon>
+
+        <mainbody>
+            <functions>
+                <func onclick="showPlayer()">
+                    <img src="img/player.svg"/>
+                    <label>Add Player</label>
+                </func>
+                <func onclick="showMonster()">
+                    <img src="img/monster.svg"/>
+                    <label>Add Monster</label>
+                </func>
+                <func onclick="showEncounter()">
+                    <img src="img/encounter.svg"/>
+                    <label>Add Encounter</label>
+                </func>
+
+                <break></break>
+
+                <func>
+                    <img src="img/players.svg"/>
+                    <label>Player List</label>
+                </func>
+                <func>
+                    <img src="img/monster_book.svg"/>
+                    <label>Monster Book</label>
+                </func>
+                <func>
+                    <img src="img/encounters.svg"/>
+                    <label>Encounter List</label>
+                </func>
+
+                <break></break>
+
+            </functions>
+
+            <content>
+                <addplayer id="player" style="display:none;">
+                    <myTitle>
+                        <img src="img/player.svg">
+                        Enter Player Details
+                    </myTitle>
+
+                    <form>
+                        <input type="text" name="player_name" placeholder="Player Name">
+                        <input type="text" name="character_name" placeholder="Character Name">
+                        <col2>
+                            <input type="text" name="class" placeholder="Class">
+                            <input type="number" name="heath" placeholder="Health">
+                        </col2>
+                    </form>
+                </addplayer>
+
+                
+                <addmonster id="monster" style="display: none;">
+                    <myTitle>
+                        <img src="img/monster.svg">
+                        Enter Monster Details
+                    </myTitle>
+
+                    <form>
+                        <input type="text" name="name" placeholder="Name">
+                        <select type="text" name="status" placeholder="Status">
+                            <option value="normal">normal</option>
+                            <option value="blinded">blinded</option>
+                            <option value="charmed">charmed</option>
+                            <option value="deafened">deafened</option>
+                            <option value="frightened">frightened</option>
+                            <option value="grappled">grappled</option>
+                            <option value="incapacitated">incapacitated</option>
+                            <option value="invisible">invisible</option>
+                            <option value="paralized">paralized</option>
+                            <option value="petrified">petrified</option>
+                            <option value="poisoned">poisoned</option>
+                            <option value="prone">prone</option>
+                            <option value="restrained">restrained</option>
+                            <option value="stunned">stunned</option>
+                            <option value="unconscious">unconscious</option>
+                            <option value="exhausted">exhausted</option>
+                            <option value="dead">dead</option>
+                        </select>
+                        <col2>                            
+                            <input type="number" name="armor" placeholder="Armor Class">
+                            <input type="number" name="heath" placeholder="Health">
+                        </col2>
+
+                        <br/>
+
+                        <col3>
+                            <input type="number" name="str" placeholder="Str">
+                            <input type="number" name="dex" placeholder="Dex">
+                            <input type="number" name="con" placeholder="Con">
+                        </col3>
+                        <col3>
+                            <input type="number" name="int" placeholder="Int">
+                            <input type="number" name="wiz" placeholder="Wiz">
+                            <input type="number" name="cha" placeholder="Cha">
+                        </col3>
+
+                        <br/>
+
+                        <input type="text" name="dice" placeholder="Hit Dice">
+                        <input type="text" name="res" placeholder="Resistance">
+                    </form>
+                </addmonster>
+
+                <addencounter id="encounter" style="display:none;">
+                    <myTitle>
+                        <img src="img/encounter.svg">
+                        Enter Encounter Details
+                    </myTitle>
+
+                    <form>
+                        <input type="text" name="name" placeholder="Name">
+                        <textarea id="encounter-notes" placeholder="Notes"></textarea>
+                        <br/>
+                        <div style="font-size: 16px; font-weight: bold; margin: 0.5rem;">Monsters</div>
+                        <tagbox id="monster-tb"></tagbox>
+                    </form>
+                </addplayer>
+
+            </content>
+
+        </mainbody>
+    </backdrop>
+    
+</html>
+
+<script>
+    function showContacts() {
+        // Hide alternative popup
+        var op_popup = document.getElementById("option-popup");
+        op_popup.style.visibility = "hidden";
+
+        var popup = document.getElementById("contact-popup");
+        if (popup.style.visibility == "hidden") {
+            popup.style.visibility = "visible";
+        } else {
+            popup.style.visibility = "hidden";
+        }
+    }
+
+    function showOptions() {
+        // Hide alternative popup
+        var co_popup = document.getElementById("contact-popup");
+        co_popup.style.visibility = "hidden";
+
+        var popup = document.getElementById("option-popup");
+        if (popup.style.visibility == "hidden") {
+            popup.style.visibility = "visible";
+        } else {
+            popup.style.visibility = "hidden";
+        }
+    }
+
+    function showPlayer() {
+        document.getElementById('player').style.display = "block";
+
+        document.getElementById('monster').style.display = "none";
+        document.getElementById('encounter').style.display = "none";
+    }
+
+    function showMonster() {
+        document.getElementById('monster').style.display = "block";
+
+        document.getElementById('player').style.display = "none";
+        document.getElementById('encounter').style.display = "none";
+    }
+
+    function showEncounter() {
+        document.getElementById('encounter').style.display = "block";
+
+        document.getElementById('player').style.display = "none";
+        document.getElementById('monster').style.display = "none";
+
+        $('#monster-tb').tagbox({
+            items: [ { value: 'dragon' }, { value: 'beholder' }, { value: "Zombie" }, { value: "Minotaur" }/* etc... */ ]
+        });
+    }
+</script>

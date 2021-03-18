@@ -1,0 +1,159 @@
+:root {
+    --darkest-gray: #202225;    /*Ribbon        */
+    --darker-gray: #292b2f;     /*SubRibbon     */
+    --dark-gray: #2f3136;       /*SidePannel    */
+    --gray: #36393f;            /*Body          */
+    --lighter-gray: #40444b;    /*TextField     */
+    --lightest-gray: #b9bbbe;   /*ButtonIcons   */
+
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tagbox-wrapper {
+  display: flex;
+  width: 34rem;
+  height: 20rem;
+  position: relative;
+  cursor: text;
+  vertical-align: middle;
+  border-radius: 8px;
+  -webkit-transition: height 0.2s, border-radius 0.2s;
+  transition: height 0.2s, border-radius 0.2s;
+  padding: 0.5rem;
+  background: #40444b;
+  color: #b9bbbe;
+  margin-left: 0.5rem;
+}
+.tagbox-wrapper.focus {
+  outline: none;
+  background: #40444b;
+  color: #b9bbbe;
+}
+.tagbox-wrapper input {
+  font: 13px/21px "Helvetica Neue", sans-serif;
+  color: #b9bbbe;
+  outline: none;
+  border: none;
+  background: transparent;
+  margin: 1px 0;
+  line-height: 19px;
+  vertical-align: top;
+}
+.tagbox-wrapper.full input {
+  display: none;
+}
+.tagbox-dropdown {
+  font: 13px/21px "Helvetica Neue", sans-serif;
+  color: #b9bbbe;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  z-index: 1000000;
+  overflow: auto;
+  /* background-color: #f0f3f5;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f9fb), to(#e8edf0));
+  background-image: -webkit-linear-gradient(top, #f8f9fb, #e8edf0);
+  background-image: linear-gradient(top, #f8f9fb, #e8edf0); */
+  margin-top: 5px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(74, 85, 99, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(74, 85, 99, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.tagbox-dropdown .empty {
+  color: #b9bbbe;
+  text-align: center;
+  text-indent: 0;
+}
+.tagbox-item {
+  position: relative;
+  line-height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  height: auto;
+  padding: 1px 10px;
+  border-bottom: 1px solid rgba(74, 85, 99, 0.3);
+}
+.tagbox-item.empty {
+  cursor: default;
+}
+.tagbox-item:not(.empty).selected {
+  background: var(--dark-gray);
+}
+.tagbox-item:not(.empty):hover,
+.tagbox-item:not(.empty).selected:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.tagbox-item:not(.empty):active {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.tagbox-item:last-of-type {
+  border-bottom: none;
+}
+.tagbox-token {
+  display: inline-block;
+  position: relative;
+  cursor: default;
+  height: 2rem;
+  width: 30%;
+  padding: 0.5rem 0 0.25rem 1rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  background-color: var(--gray);
+  color: var(--lightest-gray);
+  /* background-color: #dde9f5;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e9f1f8), to(#d1e2f2));
+  background-image: -webkit-linear-gradient(top, #e9f1f8, #d1e2f2);
+  background-image: linear-gradient(top, #e9f1f8, #d1e2f2); */
+  border-radius: 8px;
+  -webkit-transition: opacity .2s, width .2s;
+  transition: opacity .2s, width .2s;
+}
+.tagbox-token.selected {
+  -webkit-box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(44, 81, 121, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(44, 81, 121, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+.tagbox-token span {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 21px;
+}
+.tagbox-token a {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+  height: 100%;
+  width: 18px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 21px;
+  color: #b9bbbe;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  -webkit-transition: color .2s;
+  transition: color .2s;
+}
+.tagbox-token a:hover {
+  color: #b9bbbe;
+}
+.tagbox-wrapper.single .tagbox-token {
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin: 0;
+  height: auto;
+}
+.tagbox-wrapper.single .tagbox-token span {
+  line-height: 23px;
+}
