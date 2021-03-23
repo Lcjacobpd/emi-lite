@@ -12,8 +12,11 @@
 
 .tagbox-wrapper {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 34rem;
-  height: 20rem;
+  height: 22.5rem;
   position: relative;
   cursor: text;
   vertical-align: middle;
@@ -44,7 +47,7 @@
   display: none;
 }
 .tagbox-dropdown {
-  font: 13px/21px "Helvetica Neue", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: #b9bbbe;
   position: absolute;
   top: 100%;
@@ -52,14 +55,9 @@
   right: -1px;
   z-index: 1000000;
   overflow: auto;
-  /* background-color: #f0f3f5;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f9fb), to(#e8edf0));
-  background-image: -webkit-linear-gradient(top, #f8f9fb, #e8edf0);
-  background-image: linear-gradient(top, #f8f9fb, #e8edf0); */
   margin-top: 5px;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(74, 85, 99, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 0 0 1px rgba(74, 85, 99, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
+  background-color: var(--darker-gray);
 }
 .tagbox-dropdown .empty {
   color: #b9bbbe;
@@ -85,11 +83,7 @@
 }
 .tagbox-item:not(.empty):hover,
 .tagbox-item:not(.empty).selected:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-.tagbox-item:not(.empty):active {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  background: -var(--dark-gray);
 }
 .tagbox-item:last-of-type {
   border-bottom: none;
@@ -99,23 +93,15 @@
   position: relative;
   cursor: default;
   height: 2rem;
-  width: 30%;
+  width: 9.25rem;
   padding: 0.5rem 0 0.25rem 1rem;
   margin: 0.5rem;
   overflow: hidden;
   background-color: var(--gray);
   color: var(--lightest-gray);
-  /* background-color: #dde9f5;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#e9f1f8), to(#d1e2f2));
-  background-image: -webkit-linear-gradient(top, #e9f1f8, #d1e2f2);
-  background-image: linear-gradient(top, #e9f1f8, #d1e2f2); */
   border-radius: 8px;
   -webkit-transition: opacity .2s, width .2s;
   transition: opacity .2s, width .2s;
-}
-.tagbox-token.selected {
-  -webkit-box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(44, 81, 121, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(44, 81, 121, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 .tagbox-token span {
   display: block;
@@ -134,7 +120,6 @@
   font-size: 13px;
   line-height: 21px;
   color: #b9bbbe;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   -webkit-transition: color .2s;
   transition: color .2s;
 }

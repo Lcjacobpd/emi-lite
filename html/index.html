@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="toast.css">
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    
     <script type="text/javascript" src="tagbox.js"></script>
     <link rel="stylesheet" href="tagbox.css">
+    
 
     <popup id="contact-popup" style="visibility: hidden;">
         <div>Contact Info:</div>
@@ -30,39 +36,39 @@
 
     <backdrop>
         <ribbon>
-            Dungeon Manager
+            <a onclick="showTab(0)">Dungeon Manager</a>
             <div style="display: flex;">
-                <img src="img/message.svg" onclick="showContacts()">
-                <img src="img/setting.svg" onclick="showOptions()">
+                <img src="img/message.svg" onclick="showToast(1)">
+                <img src="img/setting.svg" onclick="showToast(2)">
             </div>
         </ribbon>
 
         <mainbody>
             <functions>
-                <func onclick="showPlayer()">
+                <func onclick="showTab(1)">
                     <img src="img/player.svg"/>
                     <label>Add Player</label>
                 </func>
-                <func onclick="showMonster()">
+                <func onclick="showTab(2)">
                     <img src="img/monster.svg"/>
                     <label>Add Monster</label>
                 </func>
-                <func onclick="showEncounter()">
+                <func onclick="showTab(3)">
                     <img src="img/encounter.svg"/>
                     <label>Add Encounter</label>
                 </func>
 
                 <break></break>
 
-                <func>
+                <func onclick="showTab(4)">
                     <img src="img/players.svg"/>
                     <label>Player List</label>
                 </func>
-                <func>
+                <func onclick="showTab(5)">
                     <img src="img/monster_book.svg"/>
                     <label>Monster Book</label>
                 </func>
-                <func>
+                <func onclick="showTab(6)">
                     <img src="img/encounters.svg"/>
                     <label>Encounter List</label>
                 </func>
@@ -72,24 +78,37 @@
             </functions>
 
             <content>
-                <addplayer id="player" style="display:none;">
+                <homepage id="tab0" style="display: block;">
+                    <div style="height: 90vh; width: 65vw; display: flex; justify-content: center; align-items:center;">
+                        <img src="img/logo.svg" style="height: 50rem;">
+                    </div>
+                </homepage>
+
+                <addplayer id="tab1" style="display: none;">
                     <myTitle>
                         <img src="img/player.svg">
                         Enter Player Details
                     </myTitle>
 
-                    <form>
-                        <input type="text" name="player_name" placeholder="Player Name">
-                        <input type="text" name="character_name" placeholder="Character Name">
+                    <form id="playerform">
+                        <input type="text" id="player_name" placeholder="Player Name">
+                        <input type="text" id="character_name" placeholder="Character Name">
                         <col2>
-                            <input type="text" name="class" placeholder="Class">
-                            <input type="number" name="heath" placeholder="Health">
+                            <input type="text" id="class" placeholder="Class">
+                            <input type="number" id="heath" placeholder="Health">
                         </col2>
                     </form>
+
+                    <savebutton onclick="savePlayer()">
+                        Save
+                    </savebutton>
+
+                    <toast id="playersaved" onclick="showTab(4)"> <img src="img/players.svg"> Player Saved To List</toast>
+                    <toast id="playererror"> <img src="img/warn.svg"> Incomplete form</toast>
                 </addplayer>
 
-                
-                <addmonster id="monster" style="display: none;">
+
+                <addmonster id="tab2" style="display: none;">
                     <myTitle>
                         <img src="img/monster.svg">
                         Enter Monster Details
@@ -139,9 +158,12 @@
                         <input type="text" name="dice" placeholder="Hit Dice">
                         <input type="text" name="res" placeholder="Resistance">
                     </form>
+
+                    <br/> <br/> <br/> <br/>
                 </addmonster>
 
-                <addencounter id="encounter" style="display:none;">
+
+                <addencounter id="tab3" style="display: none;">
                     <myTitle>
                         <img src="img/encounter.svg">
                         Enter Encounter Details
@@ -151,10 +173,110 @@
                         <input type="text" name="name" placeholder="Name">
                         <textarea id="encounter-notes" placeholder="Notes"></textarea>
                         <br/>
-                        <div style="font-size: 16px; font-weight: bold; margin: 0.5rem;">Monsters</div>
+                        <div style="font-size: 16px; font-weight: bold; margin: 0.5rem;">Select Monsters</div>
                         <tagbox id="monster-tb"></tagbox>
                     </form>
-                </addplayer>
+                </addencounter>
+
+
+                <listplayers id="tab4" style="display: none;">
+                    <myTitle>
+                        <img src="img/players.svg">
+                        Current Player List
+                    </myTitle>
+
+                    <myButton onclick="showTab(1)">
+                        <img src="img/plus.svg">
+                        <text>Add New</text>                     
+                    </myButton>
+
+                    <br/>
+
+                    <table id="playerlist" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Player</th>
+                            <th>Character</th>
+                            <th>Class</th>
+                            <th>Health</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </listplayers>
+
+
+                <monsterbook id="tab5" style="display: none;">
+                    <myTitle>
+                        <img src="img/monster_book.svg">
+                        Monster Book
+                    </myTitle>
+
+                    <myButton onclick="showTab(2)">
+                        <img src="img/plus.svg">
+                        <text>Add New</text>                     
+                    </myButton>
+
+                    <br/>
+
+                    <table id="monsterlist" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Name</th>
+                            <th>Condition</th>
+                            <th>Armor</th>
+                            <th>Health</th>
+                            <th></th>
+                        </tr>
+
+                        <tr>
+                            <td>Zombie</td>
+                            <td>normal</td>
+                            <td>8</td>
+                            <td>22</td>
+                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Minotaur</td>
+                            <td>normal</td>
+                            <td>14</td>
+                            <td>76</td>
+                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
+                        </tr>
+                    </table>
+                </monsterbook>
+
+                <encounterlist id="tab6" style="display: none;">
+                    <myTitle>
+                        <img src="img/encounters.svg">
+                        Created Encounters
+                    </myTitle>
+
+                    <myButton onclick="showTab(3)">
+                        <img src="img/plus.svg">
+                        <text>Add New</text>                     
+                    </myButton>
+
+                    <br/>
+
+                    <table id="encounterlist" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Name</th>
+                            <th>Notes</th>
+                            <th></th>
+                        </tr>
+
+                        <tr>
+                            <td>Zombie Hoard</td>
+                            <td>8 zombies</td>
+                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Minotaur</td>
+                            <td>A single minotaur</td>
+                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
+                        </tr>
+                    </table>
+                </encounterlist>
 
             </content>
 
@@ -164,54 +286,143 @@
 </html>
 
 <script>
-    function showContacts() {
-        // Hide alternative popup
-        var op_popup = document.getElementById("option-popup");
-        op_popup.style.visibility = "hidden";
+    function showToast(num) {
+        if (num == 1) {
+            // hide option popup
+            document.getElementById("option-popup").style.visibility = "hidden";
+            
+            
+            // toggle contact popup
+            var popup = document.getElementById("contact-popup");
+            if (popup.style.visibility == "hidden") {
+                popup.style.visibility = "visible";
+            } else {
+                popup.style.visibility = "hidden";
+            }
+        }
+        else {
+            // hide contact popup
+            document.getElementById("contact-popup").style.visibility = "hidden";
 
-        var popup = document.getElementById("contact-popup");
-        if (popup.style.visibility == "hidden") {
-            popup.style.visibility = "visible";
-        } else {
-            popup.style.visibility = "hidden";
+            // toggle option popup
+            var popup = document.getElementById("option-popup");
+            if (popup.style.visibility == "hidden") {
+                popup.style.visibility = "visible";
+            } else {
+                popup.style.visibility = "hidden";
+            }
         }
     }
 
-    function showOptions() {
-        // Hide alternative popup
-        var co_popup = document.getElementById("contact-popup");
-        co_popup.style.visibility = "hidden";
-
-        var popup = document.getElementById("option-popup");
-        if (popup.style.visibility == "hidden") {
-            popup.style.visibility = "visible";
-        } else {
-            popup.style.visibility = "hidden";
+    function showTab(num, kid=-1) {
+        // Toggle tab visibility
+        selected = "tab" + num;
+        for (var x = 0; document.getElementById("tab"+x) != null; x++) {
+            if ("tab"+x == selected)
+                document.getElementById("tab"+x).style.display = "block";
+            else
+            document.getElementById("tab"+x).style.display = "none";
         }
-    }
 
-    function showPlayer() {
-        document.getElementById('player').style.display = "block";
+        // If present, show child tab
+        if (kid > -1) {
+            document.getElementById("tab"+kid).style.display = "block";
+        }
 
-        document.getElementById('monster').style.display = "none";
-        document.getElementById('encounter').style.display = "none";
-    }
-
-    function showMonster() {
-        document.getElementById('monster').style.display = "block";
-
-        document.getElementById('player').style.display = "none";
-        document.getElementById('encounter').style.display = "none";
-    }
-
-    function showEncounter() {
-        document.getElementById('encounter').style.display = "block";
-
-        document.getElementById('player').style.display = "none";
-        document.getElementById('monster').style.display = "none";
-
+        // refresh monster tagbox
         $('#monster-tb').tagbox({
+            allowDuplicates: true,
+            maxItems: 18,
             items: [ { value: 'dragon' }, { value: 'beholder' }, { value: "Zombie" }, { value: "Minotaur" }/* etc... */ ]
         });
+    }
+
+
+    var players = [];
+    function getPlayer(name) {
+        // Fetch player by name
+        var row;
+        for (var p = 0; p < players.length; p++)
+            if (players[p][0] == name) {
+                player = players[p];
+                row = p;
+            }
+
+        return row
+    }
+
+    function editPlayer(name) {
+        var row = getPlayer(name);
+        var player = players[row];
+                
+        var form = document.getElementById("playerform");
+        form.elements[0].value = player[0];
+        form.elements[1].value = player[1];
+        form.elements[2].value = player[2];
+        form.elements[3].value = player[3];
+
+        showTab(1);
+        deletePlayer(name);
+    }
+
+    function deletePlayer(name) {
+        var row = getPlayer(name);
+        document.getElementById('playerlist').deleteRow(row + 1);
+        players.splice(row, 1);
+    }
+
+    function addPlayerRow(player) {
+        var table = document.getElementById('playerlist');
+        var row = table.insertRow();
+        for (var c = 0; c < 5; c++) {
+            var cell = row.insertCell();
+            if (c == 4) {
+                cell.innerHTML = "<img src='img/edit.svg' onclick='editPlayer(\"" +player[0]+ "\")'><img src='img/minus.svg' onclick='deletePlayer(\"" +player[0]+ "\")'>";
+                break;
+            } else {
+                cell.innerHTML = player[c];
+            }
+        }
+    }
+    
+    function savePlayer() {
+        var form = document.getElementById("playerform").elements;
+        var player = [
+            form[0].value,
+            form[1].value,
+            form[2].value,
+            form[3].value
+        ];
+
+        // Ensure valid form data
+        var valid = true;
+        for (var i = 0; i < player.length; i++)
+            if (player[i] == "") {
+                valid = false;
+                break
+            }
+        if (valid == false) {
+            reportIncomplete();
+            return;
+        }
+
+        players.push(player);
+        addPlayerRow(player);
+
+        document.getElementById("playerform").reset();
+        reportSaved();
+    }
+
+
+    function reportSaved() {
+        var x = document.getElementById("playersaved");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function reportIncomplete() {
+        var x = document.getElementById("playererror");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 </script>

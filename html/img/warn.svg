@@ -12,7 +12,7 @@
    viewBox="0 0 25 25"
    version="1.1"
    id="svg8"
-   sodipodi:docname="icons.svg"
+   sodipodi:docname="warn.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <defs
      id="defs2">
@@ -274,7 +274,7 @@
      inkscape:groupmode="layer"
      id="layer10"
      inkscape:label="edit"
-     style="display:inline">
+     style="display:none">
     <path
        style="fill:#b9bbbe;fill-opacity:1;stroke:#b9bbbe;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 2.2822905,16.839603 14.927413,4.2438267 20.95081,10.230213 8.3149394,22.866083 Z"
