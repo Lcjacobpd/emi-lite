@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="form.css">
+
+    <script type="text/javascript" src="table.js"></script>
     <link rel="stylesheet" href="table.css">
+
+    <script rel="text/javascript" src="toast.js"></script>
     <link rel="stylesheet" href="toast.css">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    
     <script type="text/javascript" src="tagbox.js"></script>
     <link rel="stylesheet" href="tagbox.css">
     
@@ -78,6 +82,11 @@
             </functions>
 
             <content>
+                <toast id="formerror">
+                    <img src="img/warn.svg">
+                    <p>Incomplete form</p>
+                </toast>
+
                 <homepage id="tab0" style="display: block;">
                     <div style="height: 90vh; width: 65vw; display: flex; justify-content: center; align-items:center;">
                         <img src="img/logo.svg" style="height: 50rem;">
@@ -91,11 +100,11 @@
                     </myTitle>
 
                     <form id="playerform">
-                        <input type="text" id="player_name" placeholder="Player Name">
-                        <input type="text" id="character_name" placeholder="Character Name">
+                        <input type="text" name="player_name" placeholder="Player Name">
+                        <input type="text" name="character_name" placeholder="Character Name">
                         <col2>
-                            <input type="text" id="class" placeholder="Class">
-                            <input type="number" id="heath" placeholder="Health">
+                            <input type="text" name="class" placeholder="Class">
+                            <input type="number" name="heath" placeholder="Health">
                         </col2>
                     </form>
 
@@ -103,8 +112,10 @@
                         Save
                     </savebutton>
 
-                    <toast id="playersaved" onclick="showTab(4)"> <img src="img/players.svg"> Player Saved To List</toast>
-                    <toast id="playererror"> <img src="img/warn.svg"> Incomplete form</toast>
+                    <toast id="playersaved" onclick="showTab(4)">
+                        <img src="img/players.svg">
+                        <p>Player saved to list</p>
+                    </toast>
                 </addplayer>
 
 
@@ -114,7 +125,7 @@
                         Enter Monster Details
                     </myTitle>
 
-                    <form>
+                    <form id="monsterform">
                         <input type="text" name="name" placeholder="Name">
                         <select type="text" name="status" placeholder="Status">
                             <option value="normal">normal</option>
@@ -137,7 +148,7 @@
                         </select>
                         <col2>                            
                             <input type="number" name="armor" placeholder="Armor Class">
-                            <input type="number" name="heath" placeholder="Health">
+                            <input type="number" name="health" placeholder="Health">
                         </col2>
 
                         <br/>
@@ -159,7 +170,14 @@
                         <input type="text" name="res" placeholder="Resistance">
                     </form>
 
-                    <br/> <br/> <br/> <br/>
+                    <savebutton onclick="saveMonster()">
+                        Save
+                    </savebutton>
+
+                    <toast id="monstersaved" onclick="showTab(5)">
+                        <img src="img/monster_book.svg">
+                        <p>Monster saved to book</p>
+                    </toast>
                 </addmonster>
 
 
@@ -225,22 +243,6 @@
                             <th>Health</th>
                             <th></th>
                         </tr>
-
-                        <tr>
-                            <td>Zombie</td>
-                            <td>normal</td>
-                            <td>8</td>
-                            <td>22</td>
-                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Minotaur</td>
-                            <td>normal</td>
-                            <td>14</td>
-                            <td>76</td>
-                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
-                        </tr>
                     </table>
                 </monsterbook>
 
@@ -286,34 +288,6 @@
 </html>
 
 <script>
-    function showToast(num) {
-        if (num == 1) {
-            // hide option popup
-            document.getElementById("option-popup").style.visibility = "hidden";
-            
-            
-            // toggle contact popup
-            var popup = document.getElementById("contact-popup");
-            if (popup.style.visibility == "hidden") {
-                popup.style.visibility = "visible";
-            } else {
-                popup.style.visibility = "hidden";
-            }
-        }
-        else {
-            // hide contact popup
-            document.getElementById("contact-popup").style.visibility = "hidden";
-
-            // toggle option popup
-            var popup = document.getElementById("option-popup");
-            if (popup.style.visibility == "hidden") {
-                popup.style.visibility = "visible";
-            } else {
-                popup.style.visibility = "hidden";
-            }
-        }
-    }
-
     function showTab(num, kid=-1) {
         // Toggle tab visibility
         selected = "tab" + num;
@@ -335,94 +309,5 @@
             maxItems: 18,
             items: [ { value: 'dragon' }, { value: 'beholder' }, { value: "Zombie" }, { value: "Minotaur" }/* etc... */ ]
         });
-    }
-
-
-    var players = [];
-    function getPlayer(name) {
-        // Fetch player by name
-        var row;
-        for (var p = 0; p < players.length; p++)
-            if (players[p][0] == name) {
-                player = players[p];
-                row = p;
-            }
-
-        return row
-    }
-
-    function editPlayer(name) {
-        var row = getPlayer(name);
-        var player = players[row];
-                
-        var form = document.getElementById("playerform");
-        form.elements[0].value = player[0];
-        form.elements[1].value = player[1];
-        form.elements[2].value = player[2];
-        form.elements[3].value = player[3];
-
-        showTab(1);
-        deletePlayer(name);
-    }
-
-    function deletePlayer(name) {
-        var row = getPlayer(name);
-        document.getElementById('playerlist').deleteRow(row + 1);
-        players.splice(row, 1);
-    }
-
-    function addPlayerRow(player) {
-        var table = document.getElementById('playerlist');
-        var row = table.insertRow();
-        for (var c = 0; c < 5; c++) {
-            var cell = row.insertCell();
-            if (c == 4) {
-                cell.innerHTML = "<img src='img/edit.svg' onclick='editPlayer(\"" +player[0]+ "\")'><img src='img/minus.svg' onclick='deletePlayer(\"" +player[0]+ "\")'>";
-                break;
-            } else {
-                cell.innerHTML = player[c];
-            }
-        }
-    }
-    
-    function savePlayer() {
-        var form = document.getElementById("playerform").elements;
-        var player = [
-            form[0].value,
-            form[1].value,
-            form[2].value,
-            form[3].value
-        ];
-
-        // Ensure valid form data
-        var valid = true;
-        for (var i = 0; i < player.length; i++)
-            if (player[i] == "") {
-                valid = false;
-                break
-            }
-        if (valid == false) {
-            reportIncomplete();
-            return;
-        }
-
-        players.push(player);
-        addPlayerRow(player);
-
-        document.getElementById("playerform").reset();
-        reportSaved();
-    }
-
-
-    function reportSaved() {
-        var x = document.getElementById("playersaved");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    }
-
-    function reportIncomplete() {
-        var x = document.getElementById("playererror");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 </script>
