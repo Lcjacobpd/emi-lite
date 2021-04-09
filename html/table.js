@@ -84,6 +84,7 @@ function deletePlayer(name) {
  *********************/
 
 var monsters = [];
+creeps = [];
 
 function saveMonster() {
     var form = document.getElementById("monsterform").elements;
@@ -115,6 +116,7 @@ function saveMonster() {
     }
 
     monsters.push(monster);
+    creeps.push({value: monster[0]})
     addMonsterRow(monster);
 
     document.getElementById("monsterform").reset();
@@ -173,4 +175,87 @@ function deleteMonster(name) {
     var row = getMonster(name);
     document.getElementById('monsterlist').deleteRow(row + 1);
     monsters.splice(row, 1);
+    creeps.splice(row, 1)
+}
+
+function importMonsterBook() {
+    jQuery.get('./monster_book.xlsx', function(data) {
+        console.log(data)
+    })
+}
+
+
+/**********************
+ * Encounter Controls
+ *********************/
+
+var encounters = [];
+
+function saveEncounter() {
+    var form = document.getElementById("encounterform").elements;
+    var notes = document.getElementById("encounter-notes").value;
+    var monsters = document.getElementById("monster-tb").value;
+
+    var encounter = [
+        form['name'].value,
+        notes,
+        monsters
+    ];
+
+    // Ensure valid form data
+    var valid = true;
+    for (var i = 0; i < encounter.length; i++)
+        if (encounter[i] == "") {
+            valid = false;
+            break
+        }
+    if (valid == false) {
+        reportIncomplete();
+        return;
+    }
+
+    encounters.push(encounter);
+    addEncounterRow(encounter);
+
+    document.getElementById("encounterform").reset(); 
+    document.getElementById("monster-tb").setAttribute("value", [{}]);
+    reportSaved("encounter");
+}
+
+function addEncounterRow(encounter) {
+    var table = document.getElementById('encounterlist');
+    var row = table.insertRow();
+    for (var c = 0; c < 3; c++) {
+        var cell = row.insertCell();
+        if (c == 2) {
+            cell.innerHTML = "<img src='img/encounter.svg' onclick='playEncounter(\"" +encounter[0]+ "\")'><img src='img/minus.svg' onclick='deleteEncounter(\"" +encounter[0]+ "\")'>";
+            break;
+        } else {
+            cell.innerHTML = encounter[c];
+        }
+    }
+}
+
+function getEncounter(name) {
+    // Fetch encounter by name
+    var row;
+    for (var p = 0; p < encounters.length; p++)
+        if (encounters[p][0] == name) {
+            encounter = encounters[p];
+            row = p;
+        }
+
+    return row
+}
+
+function deleteEncounter(name) {
+    var row = getEncounter(name);
+    document.getElementById('encounterlist').deleteRow(row + 1);
+    encounters.splice(row, 1);
+}
+
+function playEncounter(name) {
+    var row = getEncounter(name);
+    var encounter = encounters[row];
+
 }

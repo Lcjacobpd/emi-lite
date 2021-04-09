@@ -104,7 +104,7 @@
                         <input type="text" name="character_name" placeholder="Character Name">
                         <col2>
                             <input type="text" name="class" placeholder="Class">
-                            <input type="number" name="heath" placeholder="Health">
+                            <input type="number" name="health" placeholder="Health">
                         </col2>
                     </form>
 
@@ -187,13 +187,22 @@
                         Enter Encounter Details
                     </myTitle>
 
-                    <form>
+                    <form id="encounterform">
                         <input type="text" name="name" placeholder="Name">
                         <textarea id="encounter-notes" placeholder="Notes"></textarea>
                         <br/>
                         <div style="font-size: 16px; font-weight: bold; margin: 0.5rem;">Select Monsters</div>
                         <tagbox id="monster-tb"></tagbox>
                     </form>
+
+                    <savebutton onclick="saveEncounter()">
+                        Save
+                    </savebutton>
+
+                    <toast id="encountersaved" onclick="showTab(6)">
+                        <img src="img/encounters.svg">
+                        <p>Encounter saved to list</p>
+                    </toast>
                 </addencounter>
 
 
@@ -233,6 +242,11 @@
                         <text>Add New</text>                     
                     </myButton>
 
+                    <myButton onclick="importMonsterBook()">
+                        <img src="img/plus.svg">
+                        <text>Import</text>                     
+                    </myButton>
+
                     <br/>
 
                     <table id="monsterlist" cellspacing="0" cellpadding="0">
@@ -265,18 +279,6 @@
                             <th>Notes</th>
                             <th></th>
                         </tr>
-
-                        <tr>
-                            <td>Zombie Hoard</td>
-                            <td>8 zombies</td>
-                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
-                        </tr>
-
-                        <tr>
-                            <td>Minotaur</td>
-                            <td>A single minotaur</td>
-                            <td><img src="img/edit.svg"><img src="img/minus.svg"></td>
-                        </tr>
                     </table>
                 </encounterlist>
 
@@ -307,7 +309,7 @@
         $('#monster-tb').tagbox({
             allowDuplicates: true,
             maxItems: 18,
-            items: [ { value: 'dragon' }, { value: 'beholder' }, { value: "Zombie" }, { value: "Minotaur" }/* etc... */ ]
+            items: creeps
         });
     }
 </script>
