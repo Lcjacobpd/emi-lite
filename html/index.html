@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="players.js"></script>
     <script type="text/javascript" src="monsterbook.js"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -213,10 +214,17 @@
                         Current Player List
                     </myTitle>
 
-                    <myButton onclick="showTab(1)">
-                        <img src="img/plus.svg">
-                        <text>Add New</text>                     
-                    </myButton>
+                    <r>
+                        <myButton onclick="showTab(1)">
+                            <img src="img/plus.svg">
+                            <text>Add New</text>                     
+                        </myButton>
+    
+                        <myButton onclick="savePBook()">
+                            <img src="img/download.svg">
+                            <text>Save All</text>
+                        </myButton>
+                    </r>
 
                     <br/>
 
@@ -238,7 +246,7 @@
                         Monster Book
                     </myTitle>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <r>
                         <myButton onclick="showTab(2)">
                             <img src="img/plus.svg">
                             <text>Add New</text>                     
@@ -248,7 +256,7 @@
                             <img src="img/download.svg">
                             <text>Save All</text>
                         </myButton>
-                    </div>
+                    </r>
 
                     <br/>
 
@@ -296,11 +304,17 @@
 <script>
     //First time page load function.
     window.onload = function() {
+        // Populate Players table.
+        for(var i = 0; i < Players.length; i++) {
+            player = Players[i];
+            addPlayerRow(player);
+        }
+
         // Populate Monsterbook table.
         for(var i = 0; i < MonsterBook.length; i++) {
             monster = MonsterBook[i];
             addMonsterRow(monster);
-        }
+        }  
     }
 
     // Create array of first items in nested array

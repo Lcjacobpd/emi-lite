@@ -2,8 +2,6 @@
  * Player Controls
  *********************/
 
-var players = [];
-
 function savePlayer() {
     var form = document.getElementById("playerform").elements;
     var player = [
@@ -25,7 +23,7 @@ function savePlayer() {
         return;
     }
 
-    players.push(player);
+    Players.push(player);
     addPlayerRow(player);
 
     document.getElementById("playerform").reset();
@@ -49,9 +47,9 @@ function addPlayerRow(player) {
 function getPlayer(name) {
     // Fetch player by name
     var row;
-    for (var p = 0; p < players.length; p++)
-        if (players[p][0] == name) {
-            player = players[p];
+    for (var p = 0; p < Players.length; p++)
+        if (Players[p][0] == name) {
+            player = Players[p];
             row = p;
         }
 
@@ -60,7 +58,7 @@ function getPlayer(name) {
 
 function editPlayer(name) {
     var row = getPlayer(name);
-    var player = players[row];
+    var player = Players[row];
             
     var form = document.getElementById("playerform");
     form.elements[0].value = player[0];
@@ -75,7 +73,40 @@ function editPlayer(name) {
 function deletePlayer(name) {
     var row = getPlayer(name);
     document.getElementById('playerlist').deleteRow(row + 1);
-    players.splice(row, 1);
+    Players.splice(row, 1);
+}
+
+function savePBook() {
+    text = 'var Players = [\n'
+    text += '\t//Player Name,           Character Name, 	     Class,        HP\n'
+
+    for (var p = 0; p < Players.length; p++) {
+        text += '\t['
+        text += '\'' + Players[p][0].padEnd(20) + '\', '
+        text += '\'' + Players[p][1].padEnd(20) + '\', \t'
+        
+        text += '\'' + Players[p][2].padEnd(10) + '\', ' // Class
+        text += Players[p][3] + ', ' // HP
+        text += '],\n'
+    }
+    text += ']'
+
+    console.log(text)
+
+    const textToBlob = new Blob([text], {type: 'text/plain' });
+    const uFileName = 'players.js';
+
+    let newLink = document.createElement("a");
+    newLink.download = uFileName;
+
+    if (window.webkitURL != null) {
+        newLink.href = window.webkitURL.createObjectURL(textToBlob);
+    } else {
+        newLink.href = window.URL.createObjectURL(textToBlob);
+        newLink.style.display = "none";
+        document.body.appendChild(newLink);
+    }
+    newLink.click();
 }
 
 
@@ -203,7 +234,7 @@ function saveMBook() {
     console.log(text)
 
     const textToBlob = new Blob([text], {type: 'text/plain' });
-    const uFileName = 'MonsterBook.js';
+    const uFileName = 'monsterbook.js';
 
     let newLink = document.createElement("a");
     newLink.download = uFileName;
