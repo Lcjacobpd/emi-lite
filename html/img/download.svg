@@ -12,7 +12,7 @@
    viewBox="0 0 25 25"
    version="1.1"
    id="svg8"
-   sodipodi:docname="icons.svg"
+   sodipodi:docname="download.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <defs
      id="defs2">
@@ -37,8 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.0819644"
-     inkscape:cx="25.190484"
-     inkscape:cy="53.757009"
+     inkscape:cx="92.928943"
+     inkscape:cy="68.607894"
      inkscape:document-units="mm"
      inkscape:current-layer="layer12"
      inkscape:document-rotation="0"
@@ -311,7 +311,7 @@
        width="16.936823"
        height="2.0211654"
        x="3.9379878"
-       y="20.067379"
+       y="20.640074"
        ry="0.21416323" />
     <path
        sodipodi:type="star"
@@ -319,7 +319,7 @@
        id="path885"
        sodipodi:sides="3"
        sodipodi:cx="12.406399"
-       sodipodi:cy="13.658083"
+       sodipodi:cy="12.981261"
        sodipodi:r1="4.354053"
        sodipodi:r2="2.1770265"
        sodipodi:arg1="1.5707963"
@@ -327,15 +327,16 @@
        inkscape:flatsided="true"
        inkscape:rounded="0.04"
        inkscape:randomized="0"
-       d="m 12.406399,18.012136 c -0.301658,0 -3.9215496,-6.269836 -3.7707208,-6.531079 0.1508288,-0.261244 7.3906118,-0.261244 7.5414408,-10e-7 0.150829,0.261244 -3.469062,6.53108 -3.77072,6.53108 z"
        inkscape:transform-center-x="-0.0044846098"
-       inkscape:transform-center-y="0.9139413" />
+       inkscape:transform-center-y="0.83238389"
+       d="m 12.406399,17.335314 c -0.301658,0 -3.9215496,-6.269836 -3.7707208,-6.531079 0.1508288,-0.261243 7.3906118,-0.261244 7.5414408,0 0.150829,0.261243 -3.469062,6.531079 -3.77072,6.531079 z"
+       transform="matrix(1,0,0,0.91076294,0,1.5469525)" />
     <rect
        style="fill:#b9bbbe;fill-opacity:1;stroke:#b9bbbe;stroke-width:0.708813;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect887"
        width="11.181645"
        height="2.2641056"
-       x="2.8649805"
+       x="2.1881588"
        y="-13.538452"
        ry="0.23990525"
        transform="rotate(90)" />

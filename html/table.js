@@ -83,9 +83,6 @@ function deletePlayer(name) {
  * Monster Controls
  *********************/
 
-var monsters = [];
-creeps = [];
-
 function saveMonster() {
     var form = document.getElementById("monsterform").elements;
     var monster = [
@@ -115,8 +112,7 @@ function saveMonster() {
         return;
     }
 
-    monsters.push(monster);
-    creeps.push({value: monster[0]})
+    MonsterBook.push(monster);
     addMonsterRow(monster);
 
     document.getElementById("monsterform").reset();
@@ -140,9 +136,9 @@ function addMonsterRow(monster) {
 function getMonster(name) {
     // Fetch monster by name
     var row;
-    for (var p = 0; p < monsters.length; p++)
-        if (monsters[p][0] == name) {
-            monster = monsters[p];
+    for (var p = 0; p < MonsterBook.length; p++)
+        if (MonsterBook[p][0] == name) {
+            monster = MonsterBook[p];
             row = p;
         }
 
@@ -151,7 +147,8 @@ function getMonster(name) {
 
 function editMonster(name) {
     var row = getMonster(name);
-    var monster = monsters[row];
+    var monster = MonsterBook[row];
+    console.log(monster)
             
     var form = document.getElementById("monsterform");
     form.elements[0].value = monster[0];
@@ -174,14 +171,51 @@ function editMonster(name) {
 function deleteMonster(name) {
     var row = getMonster(name);
     document.getElementById('monsterlist').deleteRow(row + 1);
-    monsters.splice(row, 1);
-    creeps.splice(row, 1)
+    MonsterBook.splice(row, 1);
 }
 
-function importMonsterBook() {
-    jQuery.get('./monster_book.xlsx', function(data) {
-        console.log(data)
-    })
+function saveMBook() {
+    text = 'var MonsterBook = [\n'
+    text += '\t//Name,                  Condition,\tAC, HP, \tSTR, DEX, CON,\tINT, WIZ, CHA,\tHit Dice,     Resistance\n'
+
+    for (var m = 0; m < MonsterBook.length; m++) {
+        text += '\t['
+        text += '\'' + MonsterBook[m][0].padEnd(20) + '\', '
+        text += '\'' + MonsterBook[m][1] + '\', \t'
+
+        text += MonsterBook[m][2] + ', ' // AC
+        text += MonsterBook[m][3] + ',  \t' // HP
+
+        text += MonsterBook[m][4] + ', ' // STR
+        text += MonsterBook[m][5] + ', ' // DEX
+        text += MonsterBook[m][6] + ',  \t' // CON
+
+        text += MonsterBook[m][7] + ', ' // INT
+        text += MonsterBook[m][8] + ', ' // WIZ
+        text += MonsterBook[m][9] + ',\t\t' // CHA
+        
+        text += '\'' + MonsterBook[m][10] + '\',  \t'
+        text += '\'' + MonsterBook[m][11] + '\''
+        text += '],\n'
+    }
+    text += ']'
+
+    console.log(text)
+
+    const textToBlob = new Blob([text], {type: 'text/plain' });
+    const uFileName = 'MonsterBook.js';
+
+    let newLink = document.createElement("a");
+    newLink.download = uFileName;
+
+    if (window.webkitURL != null) {
+        newLink.href = window.webkitURL.createObjectURL(textToBlob);
+    } else {
+        newLink.href = window.URL.createObjectURL(textToBlob);
+        newLink.style.display = "none";
+        document.body.appendChild(newLink);
+    }
+    newLink.click();
 }
 
 
