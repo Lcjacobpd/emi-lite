@@ -3,6 +3,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="players.js"></script>
     <script type="text/javascript" src="monsterbook.js"></script>
+    <script type="text/javascript" src="encounters.js"></script>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="form.css">
@@ -278,10 +279,17 @@
                         Created Encounters
                     </myTitle>
 
-                    <myButton onclick="showTab(3)">
-                        <img src="img/plus.svg">
-                        <text>Add New</text>                     
-                    </myButton>
+                    <r>
+                        <myButton onclick="showTab(3)">
+                            <img src="img/plus.svg">
+                            <text>Add New</text>                     
+                        </myButton>
+
+                        <myButton onclick="saveEBook()">
+                            <img src="img/download.svg">
+                            <text>Save All</text>
+                        </myButton>
+                    </r>
 
                     <br/>
 
@@ -306,15 +314,21 @@
     window.onload = function() {
         // Populate Players table.
         for(var i = 0; i < Players.length; i++) {
-            player = Players[i];
+            var player = Players[i];
             addPlayerRow(player);
         }
 
         // Populate Monsterbook table.
         for(var i = 0; i < MonsterBook.length; i++) {
-            monster = MonsterBook[i];
+            var monster = MonsterBook[i];
             addMonsterRow(monster);
-        }  
+        }
+
+        // Populate Encounters table.
+        for(var i = 0; i < Encounters.length; i++) {
+            var encounter = Encounters[i];
+            addEncounterRow(encounter);
+        } 
     }
 
     // Create array of first items in nested array
