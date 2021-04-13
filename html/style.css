@@ -152,3 +152,36 @@ r {
     display: flex;
     flex-direction: row;
 }
+
+box {
+    background-color: var(--dark-gray);
+    margin: 1.5rem 0 -0.5rem 0.5rem;
+    padding: 0.5rem;
+    width: 44rem;
+    height: 3rem;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+box p {
+    font-size: 14px;
+    margin-top: 0.75rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    width: 33%;
+}
+
+box input {
+    background-color: var(--lighter-gray);
+    color: var(--lightest-gray);
+    font-weight: 600;
+    height: 2rem;
+    width: 5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+}

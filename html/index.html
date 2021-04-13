@@ -5,6 +5,8 @@
     <script type="text/javascript" src="vars/monsterbook.js"></script>
     <script type="text/javascript" src="vars/encounters.js"></script>
 
+    <script type="text/javascript" src="mobs.js"></script>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="form.css">
 
@@ -52,35 +54,50 @@
 
         <mainbody>
             <functions>
-                <func onclick="showTab(1)">
+                <!-- home page "tab" -->
+                <func id="f0" style="display: none;"></func>
+
+                <func id="f1" onclick="showTab(1)">
                     <img src="img/player.svg"/>
                     <label>Add Player</label>
                 </func>
-                <func onclick="showTab(2)">
+                <func id="f2" onclick="showTab(2)">
                     <img src="img/monster.svg"/>
                     <label>Add Monster</label>
                 </func>
-                <func onclick="showTab(3)">
+                <func id="f3" onclick="showTab(3)">
                     <img src="img/encounter.svg"/>
                     <label>Add Encounter</label>
                 </func>
 
                 <break></break>
 
-                <func onclick="showTab(4)">
+                <func id="f4" onclick="showTab(4)">
                     <img src="img/players.svg"/>
-                    <label>Player List</label>
+                    <label>Players</label>
                 </func>
-                <func onclick="showTab(5)">
+                <func id="f5" onclick="showTab(5)">
                     <img src="img/monster_book.svg"/>
                     <label>Monster Book</label>
                 </func>
-                <func onclick="showTab(6)">
+                <func id="f6" onclick="showTab(6)">
                     <img src="img/encounters.svg"/>
-                    <label>Encounter List</label>
+                    <label>Encounters</label>
                 </func>
 
                 <break></break>
+
+                <func id="f7" onclick="showTab(7)">
+                    <img src="img/roll.svg"/>
+                    <label>Roll Initiative</label>
+                </func>
+                <!-- child control tab -->
+                <func id="f9" style="display: none;"></func>
+
+                <func id="f8" onclick="showTab(8)">
+                    <img src="img/attack.svg"/>
+                    <label>Fight Encounter</label>
+                </func>
 
             </functions>
 
@@ -95,6 +112,8 @@
                         <img src="img/logo.svg" style="height: 50rem;">
                     </div>
                 </homepage>
+
+                <!-- ------------------------------------------------------------ -->
 
                 <addplayer id="tab1" style="display: none;">
                     <myTitle>
@@ -208,11 +227,12 @@
                     </toast>
                 </addencounter>
 
+                <!-- ------------------------------------------------------------ -->
 
                 <listplayers id="tab4" style="display: none;">
                     <myTitle>
                         <img src="img/players.svg">
-                        Current Player List
+                        Players List
                     </myTitle>
 
                     <r>
@@ -276,7 +296,7 @@
                 <encounterlist id="tab6" style="display: none;">
                     <myTitle>
                         <img src="img/encounters.svg">
-                        Created Encounters
+                        Encounters List
                     </myTitle>
 
                     <r>
@@ -302,6 +322,33 @@
                     </table>
                 </encounterlist>
 
+                <!-- ------------------------------------------------------------ -->
+
+                <runencounter id="tab7" style="display: none;">
+                    <myTitle>
+                        <img src="img/roll.svg">
+                        Roll Initiative
+                    </myTitle>
+
+                    <controls id="tab9" style="display: none;">
+                        <div id="boxes">
+                            <!-- hold all current combatants -->
+                        </div>
+
+                        <myButton onclick="sortFighters()">
+                            <img src="img/attack.svg">
+                            <text>Fight</text>
+                        </myButton>
+                    </controls>
+                </runencounter>
+
+                
+                <fightencounter id="tab8" style="display: none;">
+                    <myTitle>
+                        <img src="img/attack.svg">
+                        Fight Encounter
+                    </myTitle> 
+                </fightencounter>
             </content>
 
         </mainbody>
@@ -344,10 +391,13 @@
         // Toggle tab visibility.
         selected = "tab" + num;
         for (var x = 0; document.getElementById("tab"+x) != null; x++) {
-            if ("tab"+x == selected)
+            if ("tab"+x == selected) {
                 document.getElementById("tab"+x).style.display = "block";
-            else
-            document.getElementById("tab"+x).style.display = "none";
+                document.getElementById("f"+x).style.backgroundColor = "#40444b";
+            } else {
+                document.getElementById("tab"+x).style.display = "none";
+                document.getElementById("f"+x).style.backgroundColor = "#2f3136";
+            }
         }
 
         // If present, show child tab.

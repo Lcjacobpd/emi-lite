@@ -293,7 +293,7 @@ function addEncounterRow(encounter) {
     for (var c = 0; c < 3; c++) {
         var cell = row.insertCell();
         if (c == 2) {
-            cell.innerHTML = "<img src='img/encounter.svg' onclick='playEncounter(\"" +encounter[0]+ "\")'><img src='img/minus.svg' onclick='deleteEncounter(\"" +encounter[0]+ "\")'>";
+            cell.innerHTML = "<img src='img/roll.svg' onclick='playEncounter(\"" +encounter[0]+ "\")'><img src='img/minus.svg' onclick='deleteEncounter(\"" +encounter[0]+ "\")'>";
             break;
         } else {
             cell.innerHTML = encounter[c];
@@ -349,8 +349,59 @@ function saveEBook() {
     newLink.click();
 }
 
+
+/**********************
+ * Run Encounter
+ *********************/
+
+function slayChildren(parentname) {
+    var parent = document.getElementById(parentname);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+function adoptChildren(parentname) {
+    // Propogate page with combatants
+    for(var m = 0; m < Mobs.length; m++) {
+        var element = document.createElement("box");
+        var details = Mobs[m].split(',');
+
+        var pname = document.createElement("P");
+        pname.innerText = details[0];
+        element.appendChild(pname);
+
+        var cname = document.createElement("P");
+        cname.innerText = details[1];
+        element.appendChild(cname)
+
+        var cl = document.createElement("P");
+        cl.innerText = details[2];
+        element.appendChild(cl)
+
+        element.innerHTML += "<input type='number' name='roll"+m+"' placeholder='roll'/>"
+
+        document.getElementById(parentname).appendChild(element)
+    }
+}
+
 function playEncounter(name) {
+    Mobs = [];
+    slayChildren("boxes");
+
+    // Collect relevant Monsters and Players
+    for (var p = 0; p < Players.length; p++)
+        Mobs.push(Players[p].slice(0,3).join().replace(/\s/g, ''));
+
     var row = getEncounter(name);
-    var encounter = Encounters[row];
-    console.log(encounter);
+    var creeps = Encounters[row][2].replace(/\s/g, '').split(',');
+    for (var c = 0; c < creeps.length; c++)
+        Mobs.push("NPC," + creeps[c] + ", ");
+
+    adoptChildren("boxes");
+    showTab(7,9);
+}
+
+function sortFighters() {
+    showTab(8);
 }
