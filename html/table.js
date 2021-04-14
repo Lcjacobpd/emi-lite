@@ -61,9 +61,9 @@ function editPlayer(name) {
     var player = Players[row];
             
     var form = document.getElementById("playerform");
-    form.elements[0].value = player[0];
-    form.elements[1].value = player[1];
-    form.elements[2].value = player[2];
+    form.elements[0].value = player[0].replace(/\s\s+/g, ' ');
+    form.elements[1].value = player[1].replace(/\s\s+/g, ' ');
+    form.elements[2].value = player[2].replace(/\s\s+/g, ' ');
     form.elements[3].value = player[3];
 
     showTab(1);
@@ -182,7 +182,7 @@ function editMonster(name) {
     console.log(monster)
             
     var form = document.getElementById("monsterform");
-    form.elements[0].value = monster[0];
+    form.elements[0].value = monster[0].replace(/\s\s+/g, ' ');
     form.elements[1].value = monster[1];
     form.elements[2].value = monster[2];
     form.elements[3].value = monster[3];
@@ -192,8 +192,8 @@ function editMonster(name) {
     form.elements[7].value = monster[7];
     form.elements[8].value = monster[8];
     form.elements[9].value = monster[9];
-    form.elements[10].value = monster[10];
-    form.elements[11].value = monster[11];
+    form.elements[10].value = monster[10].replace(/\s\s+/g, ' ');
+    form.elements[11].value = monster[11].replace(/\s\s+/g, ' ');
 
     showTab(2);
     deleteMonster(name);
@@ -379,7 +379,7 @@ function adoptChildren(parentname) {
         cl.innerText = details[2];
         element.appendChild(cl)
 
-        element.innerHTML += "<input type='number' name='roll"+m+"' placeholder='roll'/>"
+        element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll'/>"
 
         document.getElementById(parentname).appendChild(element)
     }
@@ -402,6 +402,23 @@ function playEncounter(name) {
     showTab(7,9);
 }
 
+
 function sortFighters() {
+
+    console.log(element.getElementById("roll0"));
+
+    cache = []
+    for(var m = 0; m < Mobs.length; m++) {
+        var roll = element.getElementById("roll"+m).value;
+        console.log(m);
+        cache.push(roll, [Mobs[m]]);
+    }
+
+    cache.sort(function(a, b) {
+        return a[0] - b[0];
+    });
+
+    console.log(cache);
+
     showTab(8);
 }
