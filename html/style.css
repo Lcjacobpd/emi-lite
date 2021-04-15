@@ -5,6 +5,9 @@
     --gray: #36393f;            /*Body          */
     --lighter-gray: #40444b;    /*TextField     */
     --lightest-gray: #b9bbbe;   /*ButtonIcons   */
+    --disabled-gray: #757679;   /*Disabled field*/
+
+    --pale-green: #43b581; /*decorative */
 
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
@@ -164,6 +167,7 @@ box {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
 }
 
 box p {
@@ -172,6 +176,17 @@ box p {
     margin-left: 0.5rem;
     font-weight: bold;
     width: 33%;
+    text-overflow: clip;
+}
+
+box p p {
+    background-color: var(--lighter-gray);
+    color: var(--disabled-gray);
+    border-radius: 8px;
+    height: 1.5rem;
+    margin-top: -0.75rem;
+    padding: .75rem;
+    text-align: center;
 }
 
 box input {
@@ -179,9 +194,18 @@ box input {
     color: var(--lightest-gray);
     font-weight: 600;
     height: 2rem;
-    width: 5rem;
+    width: 3rem;
     padding: 0.5rem;
     border: none;
     border-radius: 8px;
     text-align: center;
+}
+
+box select {
+    width: 10rem;
+    margin: 0;
+}
+
+fightencounter box p {
+    width: 28rem;
 }

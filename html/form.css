@@ -17,7 +17,7 @@ form input {
     border-radius: 8px;
 }
 
-form select {
+select {
     background-color: var(--lighter-gray);
     color: var(--lightest-gray);
     font-weight: 600;

@@ -5,6 +5,7 @@
     <script type="text/javascript" src="vars/monsterbook.js"></script>
     <script type="text/javascript" src="vars/encounters.js"></script>
 
+    <script type="text/javascript" src="fight.js"></script>
     <script type="text/javascript" src="mobs.js"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -46,7 +47,7 @@
     <backdrop>
         <ribbon>
             <a onclick="showTab(0)">Dungeon Manager</a>
-            <div style="display: flex;">
+            <div style="display:flex;">
                 <img src="img/message.svg" onclick="showToast(1)">
                 <img src="img/setting.svg" onclick="showToast(2)">
             </div>
@@ -92,12 +93,14 @@
                     <label>Roll Initiative</label>
                 </func>
                 <!-- child control tab -->
-                <func id="f9" style="display: none;"></func>
+                <func id="f8" style="display: none;"></func>
 
-                <func id="f8" onclick="showTab(8)">
+                <func id="f9" onclick="showTab(9)">
                     <img src="img/attack.svg"/>
                     <label>Fight Encounter</label>
                 </func>
+                <!-- child control tab -->
+                <func id="f10" style="display: none;"></func>
 
             </functions>
 
@@ -149,7 +152,7 @@
 
                     <form id="monsterform">
                         <input type="text" name="name" placeholder="Name">
-                        <select type="text" name="status" placeholder="Status">
+                        <select type="text" name="status" placeholder="Status" id="status">
                             <option value="normal">normal</option>
                             <option value="blinded">blinded</option>
                             <option value="charmed">charmed</option>
@@ -328,11 +331,11 @@
                     <myTitle>
                         <img src="img/roll.svg">
                         Roll Initiative
-                    </myTitle>
+                    </myTitle>           
 
-                    <controls id="tab9" style="display: none;">
-                        <div id="boxes">
-                            <!-- hold all current combatants -->
+                    <controls id="tab8" style="display: none;">
+                        <div id="people">
+                            <!-- hold all involved combatants -->
                         </div>
 
                         <myButton onclick="sortFighters()">
@@ -343,11 +346,33 @@
                 </runencounter>
 
                 
-                <fightencounter id="tab8" style="display: none;">
+                <fightencounter id="tab9" style="display: none;">
                     <myTitle>
                         <img src="img/attack.svg">
                         Fight Encounter
-                    </myTitle> 
+                    </myTitle>
+
+                    <controls id="tab10" style="display: none;">
+                        <box style="background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem;">
+                            <p>
+                                Name
+                                <p style="width: 1rem; margin-left: 5rem;">AC</p>
+                                <p style="margin-left: 2rem; width:35rem">Modifiers</p>
+                            </p>
+                            <p>HP</p>
+                            <p>Condition</p>
+                            
+                        </box>
+                        <div id="fighters">
+                            <!-- hold sorted fighters list -->
+                        </div>
+
+                        <myButton onclick="next()">
+                            <img src="img/attack.svg">
+                            <text>Next</text>
+                        </myButton>
+                    </controls>
+
                 </fightencounter>
             </content>
 
@@ -375,7 +400,7 @@
         for(var i = 0; i < Encounters.length; i++) {
             var encounter = Encounters[i];
             addEncounterRow(encounter);
-        } 
+        }
     }
 
     // Create array of first items in nested array

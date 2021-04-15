@@ -46,19 +46,20 @@ function addPlayerRow(player) {
 
 function getPlayer(name) {
     // Fetch player by name
-    var row;
     for (var p = 0; p < Players.length; p++)
-        if (Players[p][0] == name) {
-            player = Players[p];
-            row = p;
-        }
+        if (Players[p][0] == name)
+            return Players[p];
+}
 
-    return row
+function getPlayerID(name) {
+    // Fetch player ID by name
+    for (var p = 0; p < Players.length; p++)
+        if (Players[p][0] == name)
+            return p;
 }
 
 function editPlayer(name) {
-    var row = getPlayer(name);
-    var player = Players[row];
+    var player = getPlayer(name);
             
     var form = document.getElementById("playerform");
     form.elements[0].value = player[0].replace(/\s\s+/g, ' ');
@@ -71,7 +72,7 @@ function editPlayer(name) {
 }
 
 function deletePlayer(name) {
-    var row = getPlayer(name);
+    var row = getPlayerID(name);
     document.getElementById('playerlist').deleteRow(row + 1);
     Players.splice(row, 1);
 }
@@ -82,16 +83,14 @@ function savePBook() {
 
     for (var p = 0; p < Players.length; p++) {
         text += '\t[';
-        text += '\'' + Players[p][0].padEnd(20) + '\', ';
-        text += '\'' + Players[p][1].padEnd(20) + '\', \t';
+        text += '\'' + Players[p][0] + '\', ';
+        text += '\'' + Players[p][1] + '\', \t';
         
-        text += '\'' + Players[p][2].padEnd(10) + '\', '; // Class
+        text += '\'' + Players[p][2] + '\', '; // Class
         text += Players[p][3]; // HP
         text += '],\n';
     }
     text += ']';
-
-    console.log(text)
 
     const textToBlob = new Blob([text], {type: 'text/plain' });
     const uFileName = 'players.js';
@@ -166,20 +165,20 @@ function addMonsterRow(monster) {
 
 function getMonster(name) {
     // Fetch monster by name
-    var row;
     for (var p = 0; p < MonsterBook.length; p++)
-        if (MonsterBook[p][0] == name) {
-            monster = MonsterBook[p];
-            row = p;
-        }
+        if (MonsterBook[p][0] == name)
+            return MonsterBook[p];
+}
 
-    return row
+function getMonsterID(name) {
+    // Fetch monster ID by name
+    for (var p = 0; p < MonsterBook.length; p++)
+        if (MonsterBook[p][0] == name)
+            return p
 }
 
 function editMonster(name) {
-    var row = getMonster(name);
-    var monster = MonsterBook[row];
-    console.log(monster)
+    var monster = getMonster(name);
             
     var form = document.getElementById("monsterform");
     form.elements[0].value = monster[0].replace(/\s\s+/g, ' ');
@@ -200,7 +199,7 @@ function editMonster(name) {
 }
 
 function deleteMonster(name) {
-    var row = getMonster(name);
+    var row = getMonsterID(name);
     document.getElementById('monsterlist').deleteRow(row + 1);
     MonsterBook.splice(row, 1);
 }
@@ -211,7 +210,7 @@ function saveMBook() {
 
     for (var m = 0; m < MonsterBook.length; m++) {
         text += '\t[';
-        text += '\'' + MonsterBook[m][0].padEnd(20) + '\', ';
+        text += '\'' + MonsterBook[m][0] + '\', ';
         text += '\'' + MonsterBook[m][1] + '\', \t';
 
         text += MonsterBook[m][2] + ', '; // AC
@@ -230,8 +229,6 @@ function saveMBook() {
         text += '],\n';
     }
     text += ']';
-
-    console.log(text)
 
     const textToBlob = new Blob([text], {type: 'text/plain' });
     const uFileName = 'monsterbook.js';
@@ -301,20 +298,22 @@ function addEncounterRow(encounter) {
     }
 }
 
-function getEncounter(name) {
+function getEncounter (name) {
     // Fetch encounter by name
-    var row;
     for (var p = 0; p < Encounters.length; p++)
-        if (Encounters[p][0] == name) {
-            encounter = Encounters[p];
-            row = p;
-        }
+        if (Encounters[p][0] == name)
+            return Encounters[p];  
+}
 
-    return row
+function getEncounterID (name) {
+    // Fetch encounter ID by name
+    for (var p = 0; p < Encounters.length; p++)
+        if (Encounters[p][0] == name)
+            return p
 }
 
 function deleteEncounter(name) {
-    var row = getEncounter(name);
+    var row = getEncounterID(name);
     document.getElementById('encounterlist').deleteRow(row + 1);
     Encounters.splice(row, 1);
 }
@@ -325,7 +324,7 @@ function saveEBook() {
 
     for (var e = 0; e < Encounters.length; e++) {
         text += '\t[';
-        text += '\'' + Encounters[e][0].padEnd(20) + '\', ';
+        text += '\'' + Encounters[e][0] + '\', ';
 
         text += '\'' + Encounters[e][1] + '\', \t'; // Notes
         text += '\'' + Encounters[e][2] + '\''; // Monsters
@@ -347,78 +346,4 @@ function saveEBook() {
         document.body.appendChild(newLink);
     }
     newLink.click();
-}
-
-
-/**********************
- * Run Encounter
- *********************/
-
-function slayChildren(parentname) {
-    var parent = document.getElementById(parentname);
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-function adoptChildren(parentname) {
-    // Propogate page with combatants
-    for(var m = 0; m < Mobs.length; m++) {
-        var element = document.createElement("box");
-        var details = Mobs[m].split(',');
-
-        var pname = document.createElement("P");
-        pname.innerText = details[0];
-        element.appendChild(pname);
-
-        var cname = document.createElement("P");
-        cname.innerText = details[1];
-        element.appendChild(cname)
-
-        var cl = document.createElement("P");
-        cl.innerText = details[2];
-        element.appendChild(cl)
-
-        element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll'/>"
-
-        document.getElementById(parentname).appendChild(element)
-    }
-}
-
-function playEncounter(name) {
-    Mobs = [];
-    slayChildren("boxes");
-
-    // Collect relevant Monsters and Players
-    for (var p = 0; p < Players.length; p++)
-        Mobs.push(Players[p].slice(0,3).join().replace(/\s/g, ''));
-
-    var row = getEncounter(name);
-    var creeps = Encounters[row][2].replace(/\s/g, '').split(',');
-    for (var c = 0; c < creeps.length; c++)
-        Mobs.push("NPC," + creeps[c] + ", ");
-
-    adoptChildren("boxes");
-    showTab(7,9);
-}
-
-
-function sortFighters() {
-
-    console.log(element.getElementById("roll0"));
-
-    cache = []
-    for(var m = 0; m < Mobs.length; m++) {
-        var roll = element.getElementById("roll"+m).value;
-        console.log(m);
-        cache.push(roll, [Mobs[m]]);
-    }
-
-    cache.sort(function(a, b) {
-        return a[0] - b[0];
-    });
-
-    console.log(cache);
-
-    showTab(8);
 }
