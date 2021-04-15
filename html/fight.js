@@ -1,30 +1,36 @@
-STATUS_BOX = '\
-    <select type="text" name="status" placeholder="Status" id="status"> \
-        <option value="normal">normal</option> \
-        <option value="blinded">blinded</option> \
-        <option value="charmed">charmed</option> \
-        <option value="deafened">deafened</option> \
-        <option value="frightened">frightened</option> \
-        <option value="grappled">grappled</option> \
-        <option value="incapacitated">incapacitated</option> \
-        <option value="invisible">invisible</option> \
-        <option value="paralized">paralized</option> \
-        <option value="petrified">petrified</option> \
-        <option value="poisoned">poisoned</option> \
-        <option value="prone">prone</option> \
-        <option value="restrained">restrained</option> \
-        <option value="stunned">stunned</option> \
-        <option value="unconscious">unconscious</option> \
-        <option value="exhausted">exhausted</option> \
-        <option value="dead">dead</option> \
-    </select> \
-'
-
+GENERIC_STYLE = "color: #b9bbbe; border-left: 4px solid #b9bbbe";
+ACTIVE_STYLE = "color: #43b581; border-left: 8px solid #43b581";
+KO_STYLE = "border-left: 4px solid #faa61a";
+DEAD_STYLE = "border-left: 4px solid #f04747";
 CURRENT = 0;
 
 /**********************
  * Run Encounter
  *********************/
+
+ function status_box(id) {
+    return '\
+        <select id="st' +id+ '" type="text"> \
+            <option value="normal">normal</option> \
+            <option value="blinded">blinded</option> \
+            <option value="charmed">charmed</option> \
+            <option value="deafened">deafened</option> \
+            <option value="frightened">frightened</option> \
+            <option value="grappled">grappled</option> \
+            <option value="incapacitated">incapacitated</option> \
+            <option value="invisible">invisible</option> \
+            <option value="paralized">paralized</option> \
+            <option value="petrified">petrified</option> \
+            <option value="poisoned">poisoned</option> \
+            <option value="prone">prone</option> \
+            <option value="restrained">restrained</option> \
+            <option value="stunned">stunned</option> \
+            <option value="unconscious">unconscious</option> \
+            <option value="exhausted">exhausted</option> \
+            <option value="dead">dead</option> \
+        </select> \
+    '
+}
 
  function slayChildren(parentname) {
     var parent = document.getElementById(parentname);
@@ -63,9 +69,9 @@ function loadFight() {
 
         var name = document.createElement("P")
         var hp = document.createElement("input");
-        var stat = document.createElement("st"+m);
+        var stat = document.createElement("st");
 
-        stat.innerHTML = STATUS_BOX;
+        stat.innerHTML = status_box(m);
 
         if (details[0] == "NPC") {
             var mon = getMonster(details[1])
@@ -74,7 +80,7 @@ function loadFight() {
             name.innerHTML = mon[0] + "<p style='width: 1rem; margin-left: 4rem;'>"+mon[2]+"</p>";
             name.innerHTML += "<p style='margin-top: -0.75rem; margin-left: 0.75rem; width:10rem;'>" + mon.slice(4, 10).join(", ") +"</p>";
             hp.value = mon[3];
-            stat.value = mon[1];
+            
         } else {
             var perp = getPlayer(details[0])
 
@@ -88,6 +94,9 @@ function loadFight() {
 
         element.id = "box"+m;
         document.getElementById("fighters").appendChild(element)
+
+        if (details[0] == "NPC")
+            document.getElementById("st"+m).value = mon[1];
     }
 }
 
@@ -126,18 +135,33 @@ function sortFighters() {
     loadFight()
     showTab(9, 10);
 
-    document.getElementById("box0").style = "color: #43b581";
+    CURRENT = 0;
+    document.getElementById("box0").style = ACTIVE_STYLE;
 }
 
 function next() {
-    CURRENT++;
-    if (CURRENT >= Mobs.length)
-        CURRENT = 0;
-
-    for (var m in Mobs) {
-        if (m == CURRENT)
-            document.getElementById("box"+m).style = "color: #43b581";
+    while (true) {
+        CURRENT++;
+        if (CURRENT >= Mobs.length)
+            CURRENT = 0;
+        
+        var stat = document.getElementById("st"+CURRENT).value;
+        if (stat == "dead")
+            continue;
         else
-            document.getElementById("box"+m).style = "color: #b9bbbe";
+            break;
+    }
+    
+    for (var m in Mobs) {
+        document.getElementById("box"+m).style = GENERIC_STYLE;
+
+        var stat = document.getElementById("st"+m).value;
+        if (stat == "dead")
+            document.getElementById("box"+m).style = DEAD_STYLE;
+        if (stat == "unconscious")
+            document.getElementById("box"+m).style = KO_STYLE;
+        if (m == CURRENT)
+            document.getElementById("box"+m).style = ACTIVE_STYLE;
+            
     }
 }

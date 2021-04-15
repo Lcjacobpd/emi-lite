@@ -7,7 +7,9 @@
     --lightest-gray: #b9bbbe;   /*ButtonIcons   */
     --disabled-gray: #757679;   /*Disabled field*/
 
-    --pale-green: #43b581; /*decorative */
+    --pale-green: #43b581;  /*decorative*/
+    --pale-red: #f04747;    /*decorative*/
+    --pale-orange: #faa61a; /*decorative*/  
 
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
@@ -160,7 +162,7 @@ box {
     background-color: var(--dark-gray);
     margin: 1.5rem 0 -0.5rem 0.5rem;
     padding: 0.5rem;
-    width: 44rem;
+    /* width: 44rem; */
     height: 3rem;
     border-radius: 8px;
     border: none;
@@ -168,6 +170,8 @@ box {
     flex-direction: row;
     justify-content: space-between;
     
+    width: 43.75rem;
+    border-left: 4px solid #b9bbbe;
 }
 
 box p {
