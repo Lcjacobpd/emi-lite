@@ -353,7 +353,7 @@
                     </myTitle>
 
                     <controls id="tab10" style="display: none;">
-                        <box style="background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+                        <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
                             <p>
                                 Name
                                 <p style="width: 1rem; margin-left: 5rem;">AC</p>
@@ -367,10 +367,15 @@
                             <!-- hold sorted fighters list -->
                         </div>
 
-                        <myButton onclick="next()">
-                            <img src="img/attack.svg">
-                            <text>Next</text>
-                        </myButton>
+                        <r>
+                            <myButton onclick="next()">
+                                <img src="img/attack.svg">
+                                <text>Next</text>
+                            </myButton>
+
+                            <healthbar id="hpBar"></healthbar>
+                        </r>
+                        
                     </controls>
 
                 </fightencounter>

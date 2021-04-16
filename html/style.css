@@ -7,9 +7,14 @@
     --lightest-gray: #b9bbbe;   /*ButtonIcons   */
     --disabled-gray: #757679;   /*Disabled field*/
 
-    --pale-green: #43b581;  /*decorative*/
-    --pale-red: #f04747;    /*decorative*/
-    --pale-orange: #faa61a; /*decorative*/  
+    --pale-green: #43b581;   /*decorative*/
+    --dark-orange: #a63a0c;
+    --pale-red: #f04747;     /*decorative*/
+    --pale-orange: #faa61a;  /*decorative*/
+    --pale-yellow: #ffd836;
+    --pale-magenta: #f47fff; /*decorative*/
+    --pale-blue: #7289da;    /*SaveButton*/
+    --plae-blue-hover: #667ac3;
 
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
@@ -212,4 +217,18 @@ box select {
 
 fightencounter box p {
     width: 28rem;
+}
+
+
+healthbar {
+    background-color: var(--lightest-gray);
+    font-size: 1.25rem;
+    width: 0;
+    height: 1rem;
+    border-radius: 8px;
+    display: flex;
+    margin-top: 1.75rem;
+    margin-left: 2rem;
+    font-weight: bold;
+    border-left: 30rem solid var(--pale-red);
 }

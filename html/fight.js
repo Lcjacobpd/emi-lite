@@ -3,6 +3,7 @@ ACTIVE_STYLE = "color: #43b581; border-left: 8px solid #43b581";
 KO_STYLE = "border-left: 4px solid #faa61a";
 DEAD_STYLE = "border-left: 4px solid #f04747";
 CURRENT = 0;
+MON_HP = 0;
 
 /**********************
  * Run Encounter
@@ -80,12 +81,16 @@ function loadFight() {
             name.innerHTML = mon[0] + "<p style='width: 1rem; margin-left: 4rem;'>"+mon[2]+"</p>";
             name.innerHTML += "<p style='margin-top: -0.75rem; margin-left: 0.75rem; width:10rem;'>" + mon.slice(4, 10).join(", ") +"</p>";
             hp.value = mon[3];
+            hp.id = "hp"+m;
+
+            MON_HP += mon[3];
             
         } else {
             var perp = getPlayer(details[0])
 
             name.innerHTML = perp[1] +" "+ perp[2];
             hp.value = perp[3];
+            hp.id = "hp"+m;
         }
 
         element.appendChild(name);
@@ -119,11 +124,13 @@ function playEncounter(name) {
 
 
 function sortFighters() {
-    cache = []
+    cache = [];
+    MON_HP = 0;
     for(var m = 0; m < Mobs.length; m++) {
         var roll = parseInt(document.getElementById("roll"+m).value);
         cache.push([roll, Mobs[m]]);
     }
+    console.log(MON_HP)
 
     cache.sort(function(a, b){return b[0]-a[0]});
     Mobs = []
@@ -136,6 +143,7 @@ function sortFighters() {
     showTab(9, 10);
 
     CURRENT = 0;
+    
     document.getElementById("box0").style = ACTIVE_STYLE;
 }
 
@@ -152,10 +160,15 @@ function next() {
             break;
     }
     
+    var pool = 0;
     for (var m in Mobs) {
         document.getElementById("box"+m).style = GENERIC_STYLE;
 
         var stat = document.getElementById("st"+m).value;
+
+        if (document.getElementById("box"+m).firstChild.children.length == 2)
+            pool += parseInt(document.getElementById('hp'+m).value);
+
         if (stat == "dead")
             document.getElementById("box"+m).style = DEAD_STYLE;
         if (stat == "unconscious")
@@ -164,4 +177,9 @@ function next() {
             document.getElementById("box"+m).style = ACTIVE_STYLE;
             
     }
+
+    var width = 30.0;
+
+    pool = Math.round((pool/MON_HP) * width);
+    document.getElementById("hpBar").style = "border-left: " +pool+ "rem solid var(--pale-red); width:" +(width-pool) + "rem"
 }
