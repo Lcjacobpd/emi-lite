@@ -1,6 +1,0 @@
-Name,Class,Status,Health,Armor,Str,Dex,Con,Int,Wis,Cha,Dice,Res
-Zomb01,Fighter,normal,30,12,2,1,2,0,-1,-2,1d6 2d4,Fire
-Zomb02,Fighter,normal,26,13,1,1,0,0,-2,-2,1d6 1d4,None
-Zomb03,Fighter,normal,28,16,3,2,0,0,-2,-1,1d8,None
-Zomb04,Fighter,normal,27,12,2,1,0,0,-1,-1,1d6,None
-Zomb05,Fighter,normal,29,14,1,1,2,0,-2,-2,1d6 1d4,None

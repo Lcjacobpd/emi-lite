@@ -1,3 +1,0 @@
-campaign1
-zombie_encounter.csv
-skeleton_encounter.csv
