@@ -62,9 +62,9 @@ function editPlayer(name) {
     var player = getPlayer(name);
             
     var form = document.getElementById("playerform");
-    form.elements[0].value = player[0].replace(/\s\s+/g, ' ');
-    form.elements[1].value = player[1].replace(/\s\s+/g, ' ');
-    form.elements[2].value = player[2].replace(/\s\s+/g, ' ');
+    form.elements[0].value = player[0];
+    form.elements[1].value = player[1];
+    form.elements[2].value = player[2];
     form.elements[3].value = player[3];
 
     showTab(1);
@@ -168,6 +168,8 @@ function getMonster(name) {
     for (var p = 0; p < MonsterBook.length; p++)
         if (MonsterBook[p][0] == name)
             return MonsterBook[p];
+
+    return 'ERROR'
 }
 
 function getMonsterID(name) {
@@ -181,7 +183,7 @@ function editMonster(name) {
     var monster = getMonster(name);
             
     var form = document.getElementById("monsterform");
-    form.elements[0].value = monster[0].replace(/\s\s+/g, ' ');
+    form.elements[0].value = monster[0];
     form.elements[1].value = monster[1];
     form.elements[2].value = monster[2];
     form.elements[3].value = monster[3];
@@ -191,8 +193,8 @@ function editMonster(name) {
     form.elements[7].value = monster[7];
     form.elements[8].value = monster[8];
     form.elements[9].value = monster[9];
-    form.elements[10].value = monster[10].replace(/\s\s+/g, ' ');
-    form.elements[11].value = monster[11].replace(/\s\s+/g, ' ');
+    form.elements[10].value = monster[10];
+    form.elements[11].value = monster[11];
 
     showTab(2);
     deleteMonster(name);
@@ -256,7 +258,7 @@ function saveEncounter() {
     var notes = document.getElementById("encounter-notes").value;
     var monsters = document.getElementById("monster-tb").value;
 
-    monsters = monsters.replace(/\s/g, '');
+    monsters = monsters;
 
     var encounter = [
         form['name'].value,
