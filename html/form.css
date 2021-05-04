@@ -115,3 +115,7 @@ myButton img{
 myButton text {
     margin: 0.25rem 0 0 0.5rem;
 }
+
+r input {
+    width: 3rem;
+}

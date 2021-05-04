@@ -15,7 +15,9 @@ MON_HP = 0;
             <option value="normal">normal</option> \
             <option value="blinded">blinded</option> \
             <option value="charmed">charmed</option> \
+            <option value="dead">dead</option> \
             <option value="deafened">deafened</option> \
+            <option value="exhausted">exhausted</option> \
             <option value="frightened">frightened</option> \
             <option value="grappled">grappled</option> \
             <option value="incapacitated">incapacitated</option> \
@@ -27,8 +29,6 @@ MON_HP = 0;
             <option value="restrained">restrained</option> \
             <option value="stunned">stunned</option> \
             <option value="unconscious">unconscious</option> \
-            <option value="exhausted">exhausted</option> \
-            <option value="dead">dead</option> \
         </select> \
     '
 }
@@ -80,7 +80,7 @@ function loadFight() {
             var mon = getMonster(details[1]);
 
             left.innerHTML = "NPC " + mon[0];
-            right.innerHTML = '<img src="img/detail.svg"/>';  // Details popup icon
+            right.innerHTML = "<img src='img/detail.svg' onclick='viewMonster(\"" +mon[0]+ "\")'>";  // Details popup icon
             right.innerHTML += '<p>' + mon[2] + '</p>';     // AC
             
             hp.value = mon[3];

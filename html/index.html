@@ -88,14 +88,14 @@
 
                 <break></break>
 
-                <func id="f7" onclick="showTab(7)">
+                <func id="f7" onclick="badTab()">
                     <img src="img/roll.svg"/>
                     <label>Roll Initiative</label>
                 </func>
                 <!-- child control tab -->
                 <func id="f8" style="display: none;"></func>
 
-                <func id="f9" onclick="showTab(9)">
+                <func id="f9" onclick="badTab(9)">
                     <img src="img/attack.svg"/>
                     <label>Fight Encounter</label>
                 </func>
@@ -105,11 +105,16 @@
             </functions>
 
             <content id="content" onscroll="addFade()">
-                <div id="fade" style="transition: 0.25s; position: absolute; background-image: linear-gradient(#36393f, transparent); height: .1rem; width: 40rem;"></div>
+                <div id="fade" style="transition: 0.25s; position: absolute; background-image: linear-gradient(#36393f, transparent); height: .1rem; width: 80%;"></div>
 
                 <toast id="formerror">
                     <img src="img/warn.svg">
                     <p>Incomplete form</p>
+                </toast>
+
+                <toast id="wrongtab" onclick="showTab(6)">
+                    <img src="img/warn.svg">
+                    <p>Select from Encounters</p>
                 </toast>
 
                 <homepage id="tab0" style="display: block;">
@@ -158,7 +163,9 @@
                             <option value="normal">normal</option>
                             <option value="blinded">blinded</option>
                             <option value="charmed">charmed</option>
+                            <option value="dead">dead</option>
                             <option value="deafened">deafened</option>
+                            <option value="exhausted">exhausted</option>
                             <option value="frightened">frightened</option>
                             <option value="grappled">grappled</option>
                             <option value="incapacitated">incapacitated</option>
@@ -170,8 +177,6 @@
                             <option value="restrained">restrained</option>
                             <option value="stunned">stunned</option>
                             <option value="unconscious">unconscious</option>
-                            <option value="exhausted">exhausted</option>
-                            <option value="dead">dead</option>
                         </select>
                         <col2>                            
                             <input type="number" name="armor" placeholder="Armor Class">
@@ -360,27 +365,63 @@
                     </box> -->
 
                     <controls id="tab10" style="display: none;">
-                        <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
-                            <left>Name</left>
-                            <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
-                                <div style="width: 4.25rem;">AC</div>
-                                <div style="width: 4.25rem;">HP</div>
-                                <div style="width: 9rem;">Status</div>
-                            </right>
-                        </box>
-                        <div id="fighters">
-                            <!-- hold sorted fighters list -->
-                        </div>
+                        <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                            <fightside>
+                                <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+                                    <left>Name</left>
+                                    <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
+                                        <div style="width: 4rem;">AC</div>
+                                        <div style="width: 4.25rem;">HP</div>
+                                        <div style="width: 9rem;">Status</div>
+                                    </right>
+                                </box>
+                                <div id="fighters">
+                                    <!-- hold sorted fighters list -->
+                                </div>
+        
+                                <r style="width: 60rem;">
+                                    <myButton onclick="next()" style="width:7rem">
+                                        <img src="img/attack.svg">
+                                        <text>Next</text>
+                                    </myButton>
+        
+                                    <healthbar id="hpBar"></healthbar>
+                                </r>
+                            </fightside>
+                            <monster-notes>
+                                <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+                                    <left>Monster Details</left>
+                                    <right><img src="img/detail.svg" style="height: 1.75rem;"></right>
+                                </box>
 
-                        <r>
-                            <myButton onclick="next()">
-                                <img src="img/attack.svg">
-                                <text>Next</text>
-                            </myButton>
+                                <form id="monsternotes" style="margin: 0.5rem 0 0 .5rem; padding: .75rem 8.4rem 1rem .75rem; border-radius: 0 0 1rem 1rem; background-color: var(--dark-gray);">
+                                    <input type="text" name="name" placeholder="Name" readonly>
+                                    <col2>                            
+                                        <input type="number" name="armor" placeholder="Armor Class" readonly>
+                                        <input type="number" name="health" placeholder="Health" readonly>
+                                    </col2>
+            
+                                    <br/>
+            
+                                    <r>
+                                        <input type="number" name="str" placeholder="Str" readonly>
+                                        <input type="number" name="dex" placeholder="Dex" readonly>
+                                        <input type="number" name="con" placeholder="Con" readonly>
+                                        <input type="number" name="int" placeholder="Int" readonly>
+                                        <input type="number" name="wiz" placeholder="Wiz" readonly>
+                                        <input type="number" name="cha" placeholder="Cha" readonly>
+                                    </r>
+            
+                                    <br/>
+            
+                                    <textarea id="dice-note" placeholder="Attacks" readonly></textarea>
+                                    <input type="text" name="res" placeholder="Resistance" readonly>
+                                </form>
 
-                            <healthbar id="hpBar"></healthbar>
-                        </r>
-                        
+
+                            </monster-notes>
+
+                        </div>   
                     </controls>
 
                 </fightencounter>

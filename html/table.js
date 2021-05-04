@@ -200,6 +200,24 @@ function editMonster(name) {
     deleteMonster(name);
 }
 
+function viewMonster(name) {
+    var monster = getMonster(name);
+            
+    var form = document.getElementById("monsternotes");
+    form.elements[0].value = monster[0];
+    //form.elements[1].value = monster[1];
+    form.elements[1].value = monster[2];
+    form.elements[2].value = monster[3];
+    form.elements[3].value = monster[4];
+    form.elements[4].value = monster[5];
+    form.elements[5].value = monster[6];
+    form.elements[6].value = monster[7];
+    form.elements[7].value = monster[8];
+    form.elements[8].value = monster[9];
+    form.elements[9].value = monster[10];
+    form.elements[10].value = monster[11];
+}
+
 function deleteMonster(name) {
     var row = getMonsterID(name);
     document.getElementById('monsterlist').deleteRow(row + 1);

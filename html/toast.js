@@ -10,6 +10,11 @@ function reportIncomplete() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
+function badTab() {
+    var x = document.getElementById("wrongtab");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
 
 function showPop(num) {
     for (var t = 1; t < 3; t++) {

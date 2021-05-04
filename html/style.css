@@ -173,6 +173,8 @@ r {
     flex-direction: row;
 }
 
+
+
 box {
     background-color: var(--dark-gray);
     margin: 1.5rem 0 -0.5rem 0.5rem;
@@ -263,4 +265,9 @@ healthbar {
     margin-left: 2rem;
     font-weight: bold;
     border-left: 30rem solid var(--pale-red);
+}
+
+
+fightside {
+    width: 35%
 }
