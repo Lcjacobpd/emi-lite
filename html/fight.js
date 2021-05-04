@@ -153,10 +153,14 @@ function sortFighters() {
 }
 
 function next() {
+    pos = CURRENT;
     while (true) {
         CURRENT++;
         if (CURRENT >= Mobs.length)
             CURRENT = 0;
+
+        if (pos == CURRENT) // Prevent infinite loop
+            break;
         
         var stat = document.getElementById("st"+CURRENT).value;
         var hp = document.getElementById("hp"+CURRENT).value;
