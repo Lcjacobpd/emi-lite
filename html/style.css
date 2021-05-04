@@ -145,6 +145,16 @@ functions break {
 
 content {
     margin: 2rem;
+    overflow: scroll;
+    width: 100vw;
+    padding-bottom: 10rem;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+content::-webkit-scrollbar {
+    display: none;
 }
 
 myTitle {
@@ -188,12 +198,32 @@ box p {
     text-overflow: clip;
 }
 
-box p p {
+left {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0.75rem;
+    width: 25%;
+}
+
+right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+box right {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+}
+
+right p {
     background-color: var(--lighter-gray);
     color: var(--disabled-gray);
     border-radius: 8px;
     height: 1.5rem;
-    margin-top: -0.75rem;
+    width: 2rem;
+    margin: 0 0.5rem 0 0;
     padding: .75rem;
     text-align: center;
 }
@@ -208,15 +238,17 @@ box input {
     border: none;
     border-radius: 8px;
     text-align: center;
+    margin-right: 0.5rem;
 }
 
-box select {
+right select {
     width: 10rem;
     margin: 0;
 }
 
-fightencounter box p {
-    width: 28rem;
+right img {
+    height: 2rem;
+    margin: 0.5rem 1rem;
 }
 
 

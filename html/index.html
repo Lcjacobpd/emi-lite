@@ -21,35 +21,35 @@
     <link rel="stylesheet" href="tagbox.css">
     
 
-    <popup id="contact-popup" style="visibility: hidden;">
-        <div>Contact Info:</div>
-        <p style="padding: 1rem; margin: 0">
+    <info id="pop1">
+        <div>Contact Info</div>
+        <p>
             Thank you for using Dungeon Manager!
             Please feel free to contact with questions
             and critiques.
             <br/><br/>
             Github: <a href="https://github.com/Lcjacobpd/dungeon-manager" style="color: #b9bbbe;">Lcjacobpd/dungeon-manager</a>
         </p>
-    </popup>
+    </info>
 
-    <popup id="option-popup" style="visibility: hidden;">
-        <div>Project Details:</div>
-        <p style="padding: 1rem; margin: 0">
+    <info id="pop2">
+        <div>Project Details</div>
+        <p>
             Part of this project relies on
             <a href="https://github.com/jbt/tagbox" style="color: #b9bbbe;">jbt's Tagbox</a>
             js implimentation with a modified stylesheet.
             <br/><br/>
             This particular style is not so subtly inspired by discord.
         </p>
-    </popup>
+    </info>
 
 
     <backdrop>
         <ribbon>
             <a onclick="showTab(0)">Dungeon Manager</a>
             <div style="display:flex;">
-                <img src="img/message.svg" onclick="showToast(1)">
-                <img src="img/setting.svg" onclick="showToast(2)">
+                <img src="img/message.svg" onclick="showPop(1)">
+                <img src="img/setting.svg" onclick="showPop(2)">
             </div>
         </ribbon>
 
@@ -104,7 +104,9 @@
 
             </functions>
 
-            <content>
+            <content id="content" onscroll="addFade()">
+                <div id="fade" style="transition: 0.25s; position: absolute; background-image: linear-gradient(#36393f, transparent); height: .1rem; width: 40rem;"></div>
+
                 <toast id="formerror">
                     <img src="img/warn.svg">
                     <p>Incomplete form</p>
@@ -191,7 +193,7 @@
 
                         <br/>
 
-                        <input type="text" name="dice" placeholder="Hit Dice">
+                        <textarea id="dice" placeholder="Attacks"></textarea>
                         <input type="text" name="res" placeholder="Resistance">
                     </form>
 
@@ -352,16 +354,19 @@
                         Fight Encounter
                     </myTitle>
 
+                    <!-- <box>
+                        <left>NPC Zombie</left>
+                        <right> <img src="img/plus.svg"/> <p>12</p> <input type="number"/> <select></select> </right>
+                    </box> -->
+
                     <controls id="tab10" style="display: none;">
                         <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
-                            <p>
-                                Name
-                                <p style="width: 1rem; margin-left: 5rem;">AC</p>
-                                <p style="margin-left: 2rem; width:35rem">Modifiers</p>
-                            </p>
-                            <p>HP</p>
-                            <p>Condition</p>
-                            
+                            <left>Name</left>
+                            <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
+                                <div style="width: 4.25rem;">AC</div>
+                                <div style="width: 4.25rem;">HP</div>
+                                <div style="width: 9rem;">Status</div>
+                            </right>
                         </box>
                         <div id="fighters">
                             <!-- hold sorted fighters list -->
@@ -387,6 +392,17 @@
 </html>
 
 <script>
+    function addFade() {
+        var fade = document.getElementById("fade");
+        var offset = document.getElementById("content").scrollTop;
+        
+        if(offset > 50) {
+            fade.style.height = "3rem";        
+        } else {
+            fade.style.height = "0.25rem";
+        }
+    }
+
     //First time page load function.
     window.onload = function() {
         // Populate Players table.
@@ -406,6 +422,13 @@
             var encounter = Encounters[i];
             addEncounterRow(encounter);
         }
+
+        // initial monster tagbox
+        $('#monster-tb').tagbox({
+            allowDuplicates: true,
+            maxItems: 18,
+            items: getFirstArray(MonsterBook)
+        });
     }
 
     // Create array of first items in nested array
@@ -435,11 +458,13 @@
             document.getElementById("tab"+kid).style.display = "block";
         }
 
-        // refresh monster tagbox.
-        $('#monster-tb').tagbox({
+        // refresh monster tagbox
+        var mons = getFirstArray(MonsterBook);
+        $("#monster-tb").tagbox({
             allowDuplicates: true,
             maxItems: 18,
-            items: getFirstArray(MonsterBook)
+            items: mons
         });
+
     }
 </script>

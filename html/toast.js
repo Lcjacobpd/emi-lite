@@ -11,30 +11,20 @@ function reportIncomplete() {
 }
 
 
-function showToast(num) {
-    if (num == 1) {
-        // hide option popup
-        document.getElementById("option-popup").style.visibility = "hidden";
-        
-        
-        // toggle contact popup
-        var popup = document.getElementById("contact-popup");
-        if (popup.style.visibility == "hidden") {
-            popup.style.visibility = "visible";
-        } else {
-            popup.style.visibility = "hidden";
-        }
-    }
-    else {
-        // hide contact popup
-        document.getElementById("contact-popup").style.visibility = "hidden";
+function showPop(num) {
+    for (var t = 1; t < 3; t++) {
+        var pop = document.getElementById('pop'+t);
+        var vis = pop.style.visibility;
 
-        // toggle option popup
-        var popup = document.getElementById("option-popup");
-        if (popup.style.visibility == "hidden") {
-            popup.style.visibility = "visible";
-        } else {
-            popup.style.visibility = "hidden";
-        }
+        // Toggle visiblity of current
+        if (t == num)
+            if (vis == "visible")
+                pop.style.visibility = "hidden";
+            else
+                pop.style.visibility = "visible";
+
+        // Hide all others
+        else
+            pop.style.visibility = "hidden";
     }
 }

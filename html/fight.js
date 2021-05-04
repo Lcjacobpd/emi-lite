@@ -65,10 +65,12 @@ function rollInit() {
 
 function loadFight() {
     for(var m = 0; m < Mobs.length; m++) {
-        var element = document.createElement("box");
         var details = Mobs[m].split(',');
 
-        var name = document.createElement("P")
+        var element = document.createElement("box");
+        var left = document.createElement("left")
+        var right = document.createElement("right")
+
         var hp = document.createElement("input");
         var stat = document.createElement("st");
 
@@ -77,25 +79,29 @@ function loadFight() {
         if (details[0] == "NPC") {
             var mon = getMonster(details[1]);
 
-            name.style = "display: flex;"
-            name.innerHTML = mon[0] + "<p style='width: 1rem; margin-left: 4rem;'>"+mon[2]+"</p>";
-            name.innerHTML += "<p style='margin-top: -0.75rem; margin-left: 0.75rem; width:10rem;'>" + mon.slice(4, 10).join(", ") +"</p>";
+            left.innerHTML = "NPC " + mon[0];
+            right.innerHTML = '<img src="img/detail.svg"/>';  // Details popup icon
+            right.innerHTML += '<p>' + mon[2] + '</p>';     // AC
+            
             hp.value = mon[3];
             hp.id = "hp"+m;
+            right.appendChild(hp)
 
             MON_HP += mon[3];
-            
+
         } else {
             var perp = getPlayer(details[0])
 
-            name.innerHTML = perp[1] +" "+ perp[2];
+            left.innerHTML = perp[0] +" "+ perp[1];
+            
             hp.value = perp[3];
             hp.id = "hp"+m;
+            right.appendChild(hp)
         }
 
-        element.appendChild(name);
-        element.appendChild(hp);
-        element.appendChild(stat);
+        element.appendChild(left);
+        element.appendChild(right)
+        right.appendChild(stat);
 
         element.id = "box"+m;
         document.getElementById("fighters").appendChild(element)
@@ -173,14 +179,20 @@ function next() {
             document.getElementById("box"+m).style = DEAD_STYLE;
             document.getElementById("st"+m).value = "dead";
             document.getElementById("hp"+m).value = 0;
+
+            if (document.getElementById("box"+m).children[1].children.length != 4 && stat != "dead") {
+                document.getElementById("box"+m).style = KO_STYLE;
+                document.getElementById("st"+m).value = "unconscious";
+            }
         }
+        
             
         if (stat == "unconscious")
             document.getElementById("box"+m).style = KO_STYLE;
         if (m == CURRENT)
             document.getElementById("box"+m).style = ACTIVE_STYLE;
 
-        if (document.getElementById("box"+m).firstChild.children.length == 2)
+        if (document.getElementById("box"+m).children[1].children.length == 4)
             pool += parseInt(document.getElementById('hp'+m).value);
             
     }
