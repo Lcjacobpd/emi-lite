@@ -57,6 +57,10 @@ col2 {
     flex: 2;
 }
 
+col2 p {
+    margin:0
+}
+
 col2 input {
     width: 15rem;
 }
@@ -118,4 +122,9 @@ myButton text {
 
 r input {
     width: 3rem;
+}
+
+r p {
+    margin: 0;
+    margin-left: 3rem;
 }

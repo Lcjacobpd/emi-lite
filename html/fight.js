@@ -58,7 +58,7 @@ function rollInit() {
         cl.innerText = details[2];
         element.appendChild(cl)
 
-        element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll'/>";
+        element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll' style='margin-right: 0;'/>";
         document.getElementById("people").appendChild(element)
     }
 }
