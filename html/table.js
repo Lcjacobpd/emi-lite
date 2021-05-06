@@ -216,6 +216,19 @@ function viewMonster(name) {
     form.elements[8].value = monster[9];
     form.elements[9].value = monster[10];
     form.elements[10].value = monster[11];
+
+    var icon = document.getElementById("preview");
+    icon.src = "./img/reset.svg";
+    icon.onclick = clearPreview;
+}
+
+function clearPreview() {
+    var form = document.getElementById("monsternotes");
+    form.reset();
+
+    var icon = document.getElementById("preview");
+    icon.src = "./img/detail.svg";
+    icon.onclick = ""
 }
 
 function deleteMonster(name) {

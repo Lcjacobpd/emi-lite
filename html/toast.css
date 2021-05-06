@@ -111,3 +111,21 @@ info p {
   margin: 0.5rem 1rem 0.5rem 1rem;
   padding-left: 0.5rem;
 }
+
+challenger {
+  visibility: hidden;
+  width: 24rem;
+  height: 28rem;
+  position: absolute;
+  z-index: 100;
+  left: 19.8rem;
+  top: 8rem;
+  background-color: var(--darkest-gray);
+  border-radius: 8px;
+}
+
+challenger .tagbox-wrapper {
+  width: 19rem;
+  height: 19rem;
+  margin: auto;
+}

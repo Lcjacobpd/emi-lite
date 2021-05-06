@@ -364,10 +364,26 @@
                         <right> <img src="img/plus.svg"/> <p>12</p> <input type="number"/> <select></select> </right>
                     </box> -->
 
+                    <challenger id="challenger">
+                        <div style="display: flex; flex-direction: row;" onclick="hideChallenger()">
+                            <img style="height: 1.5rem; margin: 0.75rem; margin-left: 1rem;" src="img/minus.svg"/>
+                            <div style="margin: 0.75rem 0 1rem 0.26rem; font-size: 1.25rem; font-weight: bold;">Add Monster</div>
+                            
+                        </div>
+                        
+                        <div id="monster-ch"></div>
+                    </challenger>
+
                     <controls id="tab10" style="display: none;">
                         <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
                             <fightside>
-                                <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+
+                                <mybutton style="width: 12rem" onclick="showChallenger()">
+                                    <img src="img/plus.svg"/>
+                                    <text>Add Monster</text>
+                                </mybutton>
+
+                                <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 1rem; border: none">
                                     <left>Name</left>
                                     <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
                                         <div style="width: 4rem;">AC</div>
@@ -388,13 +404,15 @@
                                     <healthbar id="hpBar"></healthbar>
                                 </r>
                             </fightside>
-                            <monster-notes>
+
+
+                            <monster-notes style="margin-top: 3rem;">
                                 <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
                                     <left>Monster Details</left>
-                                    <right><img src="img/detail.svg" style="height: 1.75rem;"></right>
+                                    <right><img id="preview" src="img/detail.svg" style="height: 1.75rem;"></right>
                                 </box>
 
-                                <form id="monsternotes" style="margin: 0.5rem 0 0 .5rem; padding: .75rem 8.4rem 1rem .75rem; border-radius: 0 0 1rem 1rem; background-color: var(--dark-gray);">
+                                <form id="monsternotes" style="margin: 0.5rem 0 0 .5rem; padding: .75rem 8.35rem 1rem .75rem; border-radius: 0 0 1rem 1rem; background-color: var(--dark-gray);">
                                     <p style="margin: 0; margin-left: 1rem;">Name</p>
                                     <input type="text" name="name" readonly>
                                     
@@ -486,6 +504,13 @@
             maxItems: 18,
             items: getFirstArray(MonsterBook)
         });
+
+        // challanger monster tagbox
+        $('#monster-ch').tagbox({
+            allowDuplicates: true,
+            maxItems: 5,
+            items: getFirstArray(MonsterBook),
+        });
     }
 
     // Create array of first items in nested array
@@ -523,5 +548,15 @@
             items: mons
         });
 
+    }
+
+    function showChallenger() {
+        var popup = document.getElementById("challenger");
+        popup.style.visibility = "visible";
+    }
+
+    function hideChallenger() {
+        var popup = document.getElementById("challenger");
+        popup.style.visibility = "hidden";
     }
 </script>
