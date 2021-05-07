@@ -115,7 +115,7 @@ info p {
 challenger {
   visibility: hidden;
   width: 24rem;
-  height: 28rem;
+  height: 29rem;
   position: absolute;
   z-index: 100;
   left: 19.8rem;
@@ -128,4 +128,14 @@ challenger .tagbox-wrapper {
   width: 19rem;
   height: 19rem;
   margin: auto;
+}
+
+challenger mybutton {
+  background-color: var(--lighter-gray);
+  margin-left: 11rem;
+}
+
+challenger mybutton:hover {
+  background-color: var(--gray);
+  transition: 0.25s;
 }

@@ -206,3 +206,47 @@ function next() {
     pool = Math.round((pool/MON_HP) * width);
     document.getElementById("hpBar").style = "border-left: " +pool+ "rem solid var(--pale-red); width:" +(width-pool) + "rem"
 }
+
+
+function addMonsters() {
+    var challengers = document.getElementById("monster-ch").value.split(',');;
+    var fighters = document.getElementById("fighters");
+
+    for (var m in challengers) {
+        var mon = getMonster(challengers[m]);
+        
+
+        var element = document.createElement("box");
+        var left = document.createElement("left")
+        var right = document.createElement("right")
+
+        var hp = document.createElement("input");
+        var stat = document.createElement("st");
+        stat.innerHTML = status_box(m);
+
+
+        left.innerHTML = "NPC " + mon[0];
+        right.innerHTML = "<img src='img/detail.svg' onclick='viewMonster(\"" +mon[0]+ "\")'>";  // Details popup icon
+        right.innerHTML += '<p>' + mon[2] + '</p>';     // AC
+        
+        hp.value = mon[3];
+        hp.id = "hp"+m;
+        right.appendChild(hp)
+
+        MON_HP += mon[3];
+
+
+        element.appendChild(left);
+        element.appendChild(right)
+        right.appendChild(stat);
+
+        element.id = "box"+m;
+        fighters.appendChild(element)
+
+        document.getElementById("st"+m).value = mon[1];
+
+
+        // Close "Add Monster" tab
+        document.getElementById("challenger").style.visibility = "hidden";
+    }
+}
