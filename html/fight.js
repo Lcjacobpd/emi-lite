@@ -43,7 +43,7 @@ function status_box(id) {
             <option value="stunned">stunned</option> \
             <option value="unconscious">unconscious</option> \
         </select> \
-    '
+    ';
 }
 
 function addMonFighter(m, offset=0) {
@@ -62,32 +62,29 @@ function addMonFighter(m, offset=0) {
 
     // Setup html elements
     var element = document.createElement("box");
-    var left = document.createElement("left")
-    var right = document.createElement("right")
+    var left = document.createElement("left");
+    var right = document.createElement("right");
 
     var hp = document.createElement("input");
     var stat = document.createElement("st");
     stat.innerHTML = status_box(num);
 
-    // Get monster details
-    
-
     left.innerHTML = "NPC " + mon[0];
     right.innerHTML = "<img src='img/detail.svg' onclick='viewMonster(\"" +mon[0]+ "\")'>";  // Details popup icon
-    right.innerHTML += '<p>' + mon[2] + '</p>';     // AC
+    right.innerHTML += '<p>' + mon[2] + '</p>'; // AC
     
     hp.value = mon[3];
     hp.id = "hp"+num;
     MON_HP += mon[3];
 
     // Add elements to box
-    right.appendChild(hp)
+    right.appendChild(hp);
     element.appendChild(left);
-    element.appendChild(right)
+    element.appendChild(right);
     right.appendChild(stat);
 
     element.id = "box"+num;
-    document.getElementById("fighters").appendChild(element)
+    document.getElementById("fighters").appendChild(element);
     document.getElementById("st"+num).value = mon[1];
 }
 
@@ -103,21 +100,21 @@ function addPlrFighter(m) {
     stat.innerHTML = status_box(m);
 
     // Get player details
-    var perp = getPlayer(details[0])
+    var perp = getPlayer(details[0]);
 
     left.innerHTML = perp[0] +" "+ perp[1];
     
     hp.value = perp[3];
     hp.id = "hp"+m;
-    right.appendChild(hp)
+    right.appendChild(hp);
 
     // Add elements to box
     element.appendChild(left);
-    element.appendChild(right)
+    element.appendChild(right);
     right.appendChild(stat);
 
     element.id = "box"+m;
-    document.getElementById("fighters").appendChild(element)
+    document.getElementById("fighters").appendChild(element);
 }
 
 
@@ -151,14 +148,14 @@ function playEncounter(name) {
 
         var cname = document.createElement("P");
         cname.innerText = details[1];
-        element.appendChild(cname)
+        element.appendChild(cname);
 
         var cl = document.createElement("P");
         cl.innerText = details[2];
-        element.appendChild(cl)
+        element.appendChild(cl);
 
         element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll' style='margin-right: 0;'/>";
-        document.getElementById("people").appendChild(element)
+        document.getElementById("people").appendChild(element);
     }
 
     // Display init page
@@ -177,9 +174,9 @@ function sortFighters() {
 
     // Sort cached pair and push to global
     cache.sort(function(a, b){return b[0]-a[0]});
-    Mobs = []
+    Mobs = [];
     for(item in cache) {
-        Mobs.push(cache[item][1])
+        Mobs.push(cache[item][1]);
     }
 
     // Clear old fighters list
@@ -206,24 +203,29 @@ function sortFighters() {
  *********************/
 
 function next() {
+    // Update active combatant
     pos = CURRENT;
     while (true) {
         CURRENT++;
+
+        // Reset on overflow
         if (CURRENT >= Mobs.length)
             CURRENT = 0;
 
-        if (pos == CURRENT) // Prevent infinite loop
+        // Prevent infinite loop
+        if (pos == CURRENT)
             break;
         
+        // Skip if dead
         var stat = document.getElementById("st"+CURRENT).value;
         var hp = document.getElementById("hp"+CURRENT).value;
-
         if (stat == "dead" || hp == 0)
             continue;
         else
             break;
     }
     
+    // Update styles by status
     var pool = 0;
     for (var m in Mobs) {
         document.getElementById("box"+m).style = GENERIC_STYLE;
@@ -231,33 +233,37 @@ function next() {
         var stat = document.getElementById("st"+m).value;
         var hp = document.getElementById("hp"+m).value;
 
-        // Death Cases
+        // Death cases
         if (stat == "dead" || hp == 0) {
             document.getElementById("box"+m).style = DEAD_STYLE;
             document.getElementById("st"+m).value = "dead";
             document.getElementById("hp"+m).value = 0;
 
+            // Player "death" -> Player unconscious
             if (document.getElementById("box"+m).children[1].children.length != 4 && stat != "dead") {
                 document.getElementById("box"+m).style = KO_STYLE;
                 document.getElementById("st"+m).value = "unconscious";
             }
         }
         
-            
+        // Unconscious case 
         if (stat == "unconscious")
             document.getElementById("box"+m).style = KO_STYLE;
+
+        // Active case
         if (m == CURRENT)
             document.getElementById("box"+m).style = ACTIVE_STYLE;
 
+        // Calculate monster health pool
         if (document.getElementById("box"+m).children[1].children.length == 4)
             pool += parseInt(document.getElementById('hp'+m).value);
             
     }
 
+    // Calculate pool percentage and update display bar
     var width = 30.0;
-
     pool = Math.round((pool/MON_HP) * width);
-    document.getElementById("hpBar").style = "border-left: " +pool+ "rem solid var(--pale-red); width:" +(width-pool) + "rem"
+    document.getElementById("hpBar").style = "border-left: " +pool+ "rem solid var(--pale-red); width:" +(width-pool) + "rem";
 }
 
 
@@ -271,4 +277,36 @@ function addMonsters() {
     }
     
     document.getElementById("challenger").style.visibility = "hidden";
+}
+
+
+function viewMonster(name) {
+    var monster = getMonster(name);
+            
+    var form = document.getElementById("monsternotes");
+    form.elements[0].value = monster[0];
+    //form.elements[1].value = monster[1]; Status Not Displayed
+    form.elements[1].value = monster[2];
+    form.elements[2].value = monster[3];
+    form.elements[3].value = monster[4];
+    form.elements[4].value = monster[5];
+    form.elements[5].value = monster[6];
+    form.elements[6].value = monster[7];
+    form.elements[7].value = monster[8];
+    form.elements[8].value = monster[9];
+    form.elements[9].value = monster[10];
+    form.elements[10].value = monster[11];
+
+    var icon = document.getElementById("preview");
+    icon.src = "./img/reset.svg";
+    icon.onclick = clearPreview;
+}
+
+function clearPreview() {
+    var form = document.getElementById("monsternotes");
+    form.reset();
+
+    var icon = document.getElementById("preview");
+    icon.src = "./img/detail.svg";
+    icon.onclick = ""
 }

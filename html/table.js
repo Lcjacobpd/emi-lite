@@ -1,6 +1,6 @@
-/**********************
+/********************************************************************
  * Player Controls
- *********************/
+ *******************************************************************/
 
 function savePlayer() {
     var form = document.getElementById("playerform").elements;
@@ -23,6 +23,7 @@ function savePlayer() {
         return;
     }
 
+    // Form is valid, push to variable and add row to table
     Players.push(player);
     addPlayerRow(player);
 
@@ -33,6 +34,8 @@ function savePlayer() {
 function addPlayerRow(player) {
     var table = document.getElementById('playerlist');
     var row = table.insertRow();
+
+    // Populate new row
     for (var c = 0; c < 5; c++) {
         var cell = row.insertCell();
         if (c == 4) {
@@ -79,18 +82,15 @@ function deletePlayer(name) {
 
 function savePBook() {
     text = 'var Players = [\n'
-    text += '\t//Player Name,           Character Name, 	        Class,        HP\n'
+    text += '\t// Player Name, Character Name, Class, HP\n'
 
     for (var p = 0; p < Players.length; p++) {
-        text += '\t[';
-        text += '\'' + Players[p][0] + '\', ';
-        text += '\'' + Players[p][1] + '\', \t';
-        
-        text += '\'' + Players[p][2] + '\', '; // Class
-        text += Players[p][3]; // HP
-        text += '],\n';
+        text += '\t[\'' + Players[p][0] + '\', '; // Player name
+        text += '\'' + Players[p][1] + '\', ';    // Character name
+        text += '\'' + Players[p][2] + '\', ';    // Class
+        text += Players[p][3] + '], \n';         // HP
     }
-    text += ']';
+    text += ']'
 
     const textToBlob = new Blob([text], {type: 'text/plain' });
     const uFileName = 'players.js';
@@ -108,10 +108,9 @@ function savePBook() {
     newLink.click();
 }
 
-
-/**********************
+/********************************************************************
  * Monster Controls
- *********************/
+ *******************************************************************/
 
 function saveMonster() {
     var form = document.getElementById("monsterform").elements;
@@ -142,6 +141,7 @@ function saveMonster() {
         return;
     }
 
+    // Form is valid, push to variable and add row to table
     MonsterBook.push(monster);
     addMonsterRow(monster);
 
@@ -152,6 +152,8 @@ function saveMonster() {
 function addMonsterRow(monster) {
     var table = document.getElementById('monsterlist');
     var row = table.insertRow();
+
+    // Populate new row
     for (var c = 0; c < 5; c++) {
         var cell = row.insertCell();
         if (c == 4) {
@@ -168,8 +170,6 @@ function getMonster(name) {
     for (var p = 0; p < MonsterBook.length; p++)
         if (MonsterBook[p][0] == name)
             return MonsterBook[p];
-
-    return 'ERROR'
 }
 
 function getMonsterID(name) {
@@ -200,66 +200,35 @@ function editMonster(name) {
     deleteMonster(name);
 }
 
-function viewMonster(name) {
-    var monster = getMonster(name);
-            
-    var form = document.getElementById("monsternotes");
-    form.elements[0].value = monster[0];
-    //form.elements[1].value = monster[1];
-    form.elements[1].value = monster[2];
-    form.elements[2].value = monster[3];
-    form.elements[3].value = monster[4];
-    form.elements[4].value = monster[5];
-    form.elements[5].value = monster[6];
-    form.elements[6].value = monster[7];
-    form.elements[7].value = monster[8];
-    form.elements[8].value = monster[9];
-    form.elements[9].value = monster[10];
-    form.elements[10].value = monster[11];
-
-    var icon = document.getElementById("preview");
-    icon.src = "./img/reset.svg";
-    icon.onclick = clearPreview;
-}
-
-function clearPreview() {
-    var form = document.getElementById("monsternotes");
-    form.reset();
-
-    var icon = document.getElementById("preview");
-    icon.src = "./img/detail.svg";
-    icon.onclick = ""
-}
-
 function deleteMonster(name) {
     var row = getMonsterID(name);
+    
+    // Delete page and variable representation
     document.getElementById('monsterlist').deleteRow(row + 1);
     MonsterBook.splice(row, 1);
 }
 
 function saveMBook() {
     text = 'var MonsterBook = [\n'
-    text += '\t//Name,                  Condition,\tAC, HP, \tSTR, DEX, CON,\tINT, WIZ, CHA,\tHit Dice,     Resistance\n'
+    text += '\t// Name, Condition, AC, HP, STR, DEX, CON, INT, WIZ, CHA, Hit Dice, Resistance\n'
 
     for (var m = 0; m < MonsterBook.length; m++) {
-        text += '\t[';
-        text += '\'' + MonsterBook[m][0] + '\', ';
-        text += '\'' + MonsterBook[m][1] + '\', \t';
+        text += '\t[\'' + MonsterBook[m][0] + '\', ';
+        text += '\'' + MonsterBook[m][1] + '\', ';
 
         text += MonsterBook[m][2] + ', '; // AC
-        text += MonsterBook[m][3] + ',  \t'; // HP
+        text += MonsterBook[m][3] + ', '; // HP
 
         text += MonsterBook[m][4] + ', '; // STR
         text += MonsterBook[m][5] + ', '; // DEX
-        text += MonsterBook[m][6] + ',  \t'; // CON
+        text += MonsterBook[m][6] + ', '; // CON
 
         text += MonsterBook[m][7] + ', '; // INT
         text += MonsterBook[m][8] + ', '; // WIZ
-        text += MonsterBook[m][9] + ',\t\t'; // CHA
+        text += MonsterBook[m][9] + ', '; // CHA
         
-        text += '\'' + MonsterBook[m][10] + '\',  \t';
-        text += '\'' + MonsterBook[m][11] + '\'';
-        text += '],\n';
+        text += '\'' + MonsterBook[m][10] + '\', ';
+        text += '\'' + MonsterBook[m][11] + '\'],\n';
     }
     text += ']';
 
@@ -280,16 +249,15 @@ function saveMBook() {
 }
 
 
-/**********************
+/********************************************************************
  * Encounter Controls
- *********************/
+ *******************************************************************/
 
 function saveEncounter() {
+    // Collect form information
     var form = document.getElementById("encounterform").elements;
     var notes = document.getElementById("encounter-notes").value;
     var monsters = document.getElementById("monster-tb").value;
-
-    monsters = monsters;
 
     var encounter = [
         form['name'].value,
@@ -309,17 +277,19 @@ function saveEncounter() {
         return;
     }
 
+    // Form is valid, push to variable and add row to table
     Encounters.push(encounter);
     addEncounterRow(encounter);
 
     document.getElementById("encounterform").reset(); 
-    document.getElementById("monster-tb").setAttribute("value", [{}]);
     reportSaved("encounter");
 }
 
 function addEncounterRow(encounter) {
     var table = document.getElementById('encounterlist');
     var row = table.insertRow();
+
+    // Populate new row
     for (var c = 0; c < 3; c++) {
         var cell = row.insertCell();
         if (c == 2) {
@@ -335,7 +305,7 @@ function getEncounter (name) {
     // Fetch encounter by name
     for (var p = 0; p < Encounters.length; p++)
         if (Encounters[p][0] == name)
-            return Encounters[p];  
+            return Encounters[p];
 }
 
 function getEncounterID (name) {
@@ -347,21 +317,20 @@ function getEncounterID (name) {
 
 function deleteEncounter(name) {
     var row = getEncounterID(name);
+
+    // Delete page and variable representation
     document.getElementById('encounterlist').deleteRow(row + 1);
     Encounters.splice(row, 1);
 }
 
 function saveEBook() {
-    text = 'var Encounters = [\n'
-    text += '\t//Name,                  Notes,     Monsters\n'
+    text = 'var Encounters = [\n';
+    text += '\t// Name, Notes, Monsters\n';
 
     for (var e = 0; e < Encounters.length; e++) {
-        text += '\t[';
-        text += '\'' + Encounters[e][0] + '\', ';
-
-        text += '\'' + Encounters[e][1] + '\', \t'; // Notes
-        text += '\'' + Encounters[e][2] + '\''; // Monsters
-        text += '],\n';
+        text += '\t[\'' + Encounters[e][0] + '\', '; // Name
+        text += '\'' + Encounters[e][1] + '\', ';    // Notes
+        text += '\'' + Encounters[e][2] + '\'],\n';  // Monsters
     }
     text += ']';
 
