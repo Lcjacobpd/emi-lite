@@ -14,13 +14,15 @@ the monsters involved can be found in the monsterbook table (Tab 5). Add
 any other monsters you need before continuing to encounter creation. When
 making a new encounter (Tab 3), enter a recognisable name and descriptive
 notes before selecting which monsters are in the encounter from the tagbox.
+Each tagbox selection is a distinct monster entity. Multiple instances of
+a monster can appear in an encounter. Ex: If you select "Zombie" seven
+times there will be seven Zombies in your encounter.
 
-<br/>
 
-> ### Note: <br/>
-> Each tagbox selection is a distinct monster entity. Multiple instances of
-> a monster can appear in an encounter. Ex: If you select "Zombie" seven
-> times there will be seven Zombies in your encounter.
+> Note: <br/>
+> You must overrite the Monster Book table with the "Save All" button
+> before your latest monsters can be found in the tagbox when creating
+> an encounter.
 
 <br/>
 
@@ -38,8 +40,8 @@ Monster Book (Tab 5) as well.
 
 ## Entering an Encounter
 Now that you've setup an encounter you may have noticed that Tabs 7 and 8
-appear to be blank. This is because you need to pick an Encounter from the
-table (Tab 6) and use the D20 icon. This will populate and redirect you to
+appear to be unreachable. This is because you need to pick an Encounter from
+the table (Tab 6) and use the D20 icon. This will populate and redirect you to
 Roll Initiative (Tab 7). Here you can enter the rolls of each player and
 monster involved before proceeding to fight using the button at the bottom.
 
@@ -59,7 +61,7 @@ involved.
 
 <br/>
 
-> ### Note: <br/>
+> Note: <br/>
 > There is no checks in place to detect the end of an encounter. When done,
 > simply return to the Encounters List (Tab 6) or some other tab. Should you
 > want to reuse an encounter, selecting to roll initiative will reset all
@@ -76,14 +78,12 @@ the changes to file with the "Save All" button.
 
 -------------------------------------------------------------------------------
 
-## TODO:
-### Planned Functionality:
-* Ability to add monster during an encounter
+### TODO:
+Planned Functionality:
+* Awaiting feedback
 
-### Known Bugs:
+Known Bugs:
 * Editing a Player or Monster without saving deletes them
-* Pressing Tabs 7 or 8 while already on those pages will empty them
 
 
--------------------------------------------------------------------------------
 <br/>

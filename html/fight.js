@@ -277,6 +277,7 @@ function addMonsters() {
     }
     
     document.getElementById("challenger").style.visibility = "hidden";
+    document.getElementById("content").style =  "overflow: scroll;";
 }
 
 
