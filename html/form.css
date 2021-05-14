@@ -128,3 +128,32 @@ r p {
     margin: 0;
     margin-left: 3rem;
 }
+
+search {
+    background-color: var(--darkest-gray);
+    font-size: 1.25rem;
+    width: 15rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: row;
+}
+
+search input {
+    background-color: transparent;
+    width: 12rem;
+    border: none;
+    color: var(--lightest-gray);
+    font-weight: 600;
+}
+
+search img {
+    height: 1.5rem;
+    margin: 0.25rem 0.5rem 0 0.5rem;
+}

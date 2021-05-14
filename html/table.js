@@ -143,6 +143,7 @@ function saveMonster() {
 
     // Form is valid, push to variable and add row to table
     MonsterBook.push(monster);
+    console.log(MonsterBook)
     addMonsterRow(monster);
 
     document.getElementById("monsterform").reset();
@@ -246,6 +247,23 @@ function saveMBook() {
         document.body.appendChild(newLink);
     }
     newLink.click();
+}
+
+function searchMonsters() {
+    var search = document.getElementById("search").value.toUpperCase();
+    var rows = document.getElementById("monsterlist").rows;
+
+    for (var r = 1; r < rows.length; r++) {
+        var row = rows[r];
+        var name = row.cells[0].innerText.toUpperCase();
+
+        // Filter by search
+        if (name.indexOf(search) > -1)
+            row.style.display = "";
+
+        else
+            row.style.display = "none";
+    }
 }
 
 

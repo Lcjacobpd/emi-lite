@@ -271,3 +271,7 @@ healthbar {
 fightside {
     width: 35%
 }
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
