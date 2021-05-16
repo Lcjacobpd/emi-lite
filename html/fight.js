@@ -263,6 +263,10 @@ function next() {
     // Calculate pool percentage and update display bar
     var width = 30.0;
     pool = Math.round((pool/MON_HP) * width);
+
+    if (pool > width)
+        pool = width;
+
     document.getElementById("hpBar").style = "border-left: " +pool+ "rem solid var(--pale-red); width:" +(width-pool) + "rem";
 }
 
