@@ -7,15 +7,21 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="25mm"
-   height="25mm"
-   viewBox="0 0 25 25"
+   width="23mm"
+   height="13mm"
+   viewBox="0 0 23 13"
    version="1.1"
    id="svg8"
    sodipodi:docname="logo.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
   <defs
      id="defs2">
+    <rect
+       x="0.92035609"
+       y="4.6017804"
+       width="16.504637"
+       height="13.467986"
+       id="rect836" />
     <rect
        x="4.5376706"
        y="3.4572728"
@@ -36,11 +42,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.2199634"
-     inkscape:cx="25.402634"
-     inkscape:cy="42.961641"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="52.116573"
+     inkscape:cy="41.249041"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer8"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:object-paths="false"
@@ -54,7 +60,8 @@
      inkscape:window-maximized="1"
      inkscape:snap-global="true"
      inkscape:snap-intersection-paths="true"
-     inkscape:snap-smooth-nodes="true" />
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-nodes="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -63,7 +70,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -71,10 +78,36 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="dm"
-     style="display:inline">
+     style="display:none"
+     sodipodi:insensitive="true">
     <path
        id="path888"
        style="fill:#40444b;fill-opacity:1;stroke:#000000;stroke-width:0.214945px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0"
        d="m 13.61317,7.6299902 -3.436604,0.015533 -0.008,0.7753979 C 9.2143683,7.6916784 7.1761492,7.6312495 7.1761492,7.6312495 l -4.1582656,0.00546 0.00588,10.3962935 c 0,0 2.3273329,0.02328 4.0961331,0 1.7688,-0.02327 3.0621293,-0.983206 3.0621293,-0.983206 l -0.01091,0.992862 2.106631,0.0059 -0.08774,-8.4533905 2.863557,8.4365975 1.908898,0.0055 2.836269,-8.4311403 -0.0932,8.4256823 2.314859,0.01133 h 2.345924 L 22.020381,16.154749 V 7.6367072 l -3.341306,8.396e-4 -2.575564,7.6570022 z M 3.0178836,7.6367072 H 0.67195852 L 3.0178836,9.5250341 Z M 6.1916835,9.5283926 C 7.6627244,9.542864 9.7888833,9.9335564 9.7580102,12.82016 9.7200129,16.372908 6.927199,16.125782 6.927199,16.125782 L 5.3696863,16.144674 5.3125912,9.5523221 C 5.5476996,9.5416354 5.8522126,9.525053 6.1916835,9.5283926 Z" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="dm 1"
+     style="display:inline">
+    <g
+       id="g927"
+       transform="translate(-0.79512684,-6.2206982)">
+      <text
+         xml:space="preserve"
+         id="text834"
+         style="font-style:italic;font-weight:bold;font-size:10.5833px;line-height:1.25;font-family:'Eras Bold ITC';-inkscape-font-specification:'Eras Bold ITC Bold Italic';white-space:pre;shape-inside:url(#rect836);fill:#40444b;fill-opacity:1;"
+         transform="matrix(1.2554439,0,0,1.2554439,0.54313573,-1.1318177)"><tspan
+           x="0.91992188"
+           y="15.196316"><tspan
+             style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:Impact;-inkscape-font-specification:'Impact Condensed';fill:#40444b;fill-opacity:1">EMI</tspan></tspan></text>
+      <rect
+         style="fill:#40444b;fill-opacity:1;stroke:none;stroke-width:0.264824;stroke-linecap:round"
+         id="rect842"
+         width="1.7694011"
+         height="2.1014862"
+         x="6.679152"
+         y="15.844663" />
+    </g>
   </g>
 </svg>

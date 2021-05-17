@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="vars/players.js"></script>
-    <script type="text/javascript" src="vars/monsterbook.js"></script>
-    <script type="text/javascript" src="vars/encounters.js"></script>
+    <script type="text/javascript" src="js/vars/players.js"></script>
+    <script type="text/javascript" src="js/vars/monsterbook.js"></script>
+    <script type="text/javascript" src="js/vars/encounters.js"></script>
+    <script type="text/javascript" src="js/tagbox.js"></script>
 
-    <script type="text/javascript" src="fight.js"></script>
+    <script type="text/javascript" src="js/table.js"></script>
+    <script type="text/javascript" src="js/fight.js"></script>
+    <script rel="text/javascript" src="js/toast.js"></script>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="form.css">
-
-    <script type="text/javascript" src="table.js"></script>
-    <link rel="stylesheet" href="table.css">
-
-    <script rel="text/javascript" src="toast.js"></script>
-    <link rel="stylesheet" href="toast.css">
-
-    <script type="text/javascript" src="tagbox.js"></script>
-    <link rel="stylesheet" href="tagbox.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/tagbox.css">
     
 
     <info id="pop1">
         <div>Contact Info</div>
         <p>
-            Thank you for using Dungeon Manager!
-            Please feel free to contact with questions
-            and critiques.
+            Thank you for using Emi, my encounter managment interface.
+            Please feel free to contact with questions and critiques.
             <br/><br/>
-            Github: <a href="https://github.com/Lcjacobpd/dungeon-manager" style="color: #b9bbbe;">Lcjacobpd/dungeon-manager</a>
+            Github: <a href="https://github.com/Lcjacobpd/emi" style="color: #b9bbbe;">Lcjacobpd/emi</a>
         </p>
     </info>
 
@@ -38,14 +34,14 @@
             <a href="https://github.com/jbt/tagbox" style="color: #b9bbbe;">jbt's Tagbox</a>
             js implimentation with a modified stylesheet.
             <br/><br/>
-            This particular style is not so subtly inspired by discord.
+            This project's style is not so subtly inspired by discord.
         </p>
     </info>
 
 
     <backdrop>
         <ribbon>
-            <a onclick="showTab(0)">Dungeon Manager</a>
+            <a onclick="showTab(0)">Encounter Manager</a>
             <div style="display:flex;">
                 <img src="img/message.svg" onclick="showPop(1)">
                 <img src="img/setting.svg" onclick="showPop(2)">
@@ -117,8 +113,8 @@
                 </toast>
 
                 <homepage id="tab0" style="display: block;">
-                    <div style="height: 90vh; width: 65vw; display: flex; justify-content: center; align-items:center;">
-                        <img src="img/logo.svg" style="height: 50rem;">
+                    <div style="display: flex; justify-content: space-around; vertical-align: middle; height: 80vh; margin-right: 15%;">
+                        <img src="img/logo.svg" style="height: 25rem; margin: auto">
                     </div>
                 </homepage>
 

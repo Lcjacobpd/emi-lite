@@ -1,71 +1,57 @@
-# Dungeon Manager
+<img src="img/logo.svg" style="height: 80px">
 
-Providing DMs with interfaces for prefabricating, loading and running
+## An Encounter Management Interface
+-----
+EMI is an encounter management interface I designed for the purpose
+of providing DMs with tools for creating, saving and running
 encounters. Tracking order of actions by initiative, status of each
 involved creature and their ability scores.
 
-To use simply open the index file in the ```html/``` directory.
+To use EMI, simply open in your browser of choice.
 
 <br/>
 
 ## Getting Started
-Setting up an encounter is fairly straightforward; first double check that
-the monsters involved can be found in the monsterbook table (Tab 5). Add
-any other monsters you need before continuing to encounter creation. When
-making a new encounter (Tab 3), enter a recognisable name and descriptive
-notes before selecting which monsters are in the encounter from the tagbox.
-Each tagbox selection is a distinct monster entity. Multiple instances of
-a monster can appear in an encounter. Ex: If you select "Zombie" seven
-times there will be seven Zombies in your encounter.
-
+Setting up an encounter is fairly straightforward; first double 
+check that the monsters you're going to use can be found in the
+Monster Book table. If you needed to add new monsters to the book,
+be sure to save over the existing ```js/vars/monsterbook.js``` with
+the "Save All" button.
 
 > Note: <br/>
-> You must overrite the Monster Book table with the "Save All" button
-> before your latest monsters can be found in the tagbox when creating
-> an encounter.
+> Overwriting the Monster book keeps your monsters safe from page
+> refresh and must be done for your latest additions to appear in
+> the tagbox when creating an encounter. You'll find similar
+> functionality for both the Players and Encounters tables as well.
+> Remember to save your changes regularly to preserve them for
+> future use.
+
+Continuing to encounter creation, enter a recognisable name,
+descriptive notes and select some monsters monsters from the tagbox.
+Each tagbox selection is a distinct monster entity. Multiple
+instances of a monster can appear in an encounter. For example, if
+you select "Zombie" seven times there will be seven Zombies in your
+encounter.
 
 <br/>
 
-## Save to File
-Once you're happy with your encounter, save it. You'll then find that it has
-been added to the Encounter List (Tab 6). You can also click on the popup
-that is displayed on a succesful save to be directed to the table. To ensure
-that your encounter will be visible for later use or after page refresh,
-select the "Save All" option on the encounter page. This will open up a
-dialogue popup to save a file. Find the appropriate file to overwrite in
-```html/vars/```. This feature is available for the Players List (Tab 4) and 
-Monster Book (Tab 5) as well.
+## Running an Encounter
+Before jumping into an encounter from your list, make sure that your
+players are all accounted for. Once that is settled, use the d20 icon
+on a specific encounter to roll for initiative. Here you'll enter the
+rolls of each player and monster before proceeding to fight.
 
-<br/>
+Once everyone has been assigned an initiative value, the list of
+combatants is sorted in descending order. Each turn a player or
+monster will be highlighted green as the active combatant at that
+time. From this point, the health and status of any creature can be
+modified arbitrarily.
 
-## Entering an Encounter
-Now that you've setup an encounter you may have noticed that Tabs 7 and 8
-appear to be unreachable. This is because you need to pick an Encounter from
-the table (Tab 6) and use the D20 icon. This will populate and redirect you to
-Roll Initiative (Tab 7). Here you can enter the rolls of each player and
-monster involved before proceeding to fight using the button at the bottom.
-
-<br/>
-
-## Running and Encounter
-Once everyone has been assigned an initiative value, the list of combatants
-is sorted in descending order. Each turn a player or monster will be
-highlighted green as the active combatant at that time. However, the current
-combatant has no effect on what action can be performed; regardless of who's
-turn it is the health and status of any creature can be modified arbitrarily.
-
-Each "turn" is ended when the Next button is pressed. Combatants with the
-"dead" status are skipped when pressing Next. The health bar at the
-bottom of the list of combatants shows the health pool of all the monsters
-involved.
-
-<br/>
-
-> Note: <br/>
-> There is no checks in place to detect the end of an encounter. When done,
-> simply return to the Encounters List (Tab 6) or some other tab. Should you
-> want to reuse an encounter, selecting to roll initiative will reset all
-> combatant stats.
+* Each turn is ended when the "Next" button is pressed.
+* Combatants marked as "dead" will be skipped.
+* The health bar at the bottom shows the health pool of all monsters
+  present as a progress indicator.
+* When done, simply return to the encounters list or some other tab.
 
 <br/>
 
@@ -78,12 +64,11 @@ the changes to file with the "Save All" button.
 
 -------------------------------------------------------------------------------
 
-### TODO:
-Planned Functionality:
-* Awaiting feedback
-
-Known Bugs:
-* Editing a Player or Monster without saving deletes them
-
-
 <br/>
+
+## TODO
+* Additional Functionality
+    * Awaiting feedback
+
+* Known Bugs
+    * Editing a Player or Monster without saving deletes them
