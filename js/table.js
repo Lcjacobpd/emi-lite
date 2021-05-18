@@ -214,10 +214,11 @@ function saveMBook() {
     text += '\t// Name, Condition, AC, HP, STR, DEX, CON, INT, WIZ, CHA, Hit Dice, Resistance\n'
 
     for (var m = 0; m < MonsterBook.length; m++) {
-        text += '\t[\'' + MonsterBook[m][0] + '\', ';
-        text += '\'' + MonsterBook[m][1] + '\', ';
+        text += '\t[\n';
+        text += '\t\t\'' + MonsterBook[m][0] + '\', \n';
+        text += '\t\t\'' + MonsterBook[m][1] + '\', \n';
 
-        text += MonsterBook[m][2] + ', '; // AC
+        text += '\t\t' + MonsterBook[m][2] + ', '; // AC
         text += MonsterBook[m][3] + ', '; // HP
 
         text += MonsterBook[m][4] + ', '; // STR
@@ -226,10 +227,10 @@ function saveMBook() {
 
         text += MonsterBook[m][7] + ', '; // INT
         text += MonsterBook[m][8] + ', '; // WIZ
-        text += MonsterBook[m][9] + ', '; // CHA
+        text += MonsterBook[m][9] + ', \n'; // CHA
         
-        text += '\'' + MonsterBook[m][10] + '\', ';
-        text += '\'' + MonsterBook[m][11] + '\'],\n';
+        text += '\t\t\'' + MonsterBook[m][10].replace("\n", "\\n") + '\',\n'; // Attacks
+        text += '\t\t\'' + MonsterBook[m][11] + '\'\n\t],\n';
     }
     text += ']';
 
@@ -312,8 +313,15 @@ function addEncounterRow(encounter) {
     c0.innerText = encounter[0];
 
     var c1 = row.insertCell();
-    if (encounter[1].length > 60)
-        c1.innerText = encounter[1].substring(0, 117)+"..."; // Hello John
+    if (encounter[1].split("\n").length > 2) {
+        var shortened = encounter[1].split("\n").slice(0,2).join("\n") + "...";
+        if (shortened.length > 120)
+            c1.innerText = shortened.substring(0, 117)+"..."; // Wake me when you need me
+        else
+            c1.innerText = shortened;
+    }
+    else if (encounter[1].length > 120)
+        c1.innerText = encounter[1].substring(0, 117)+"..."; // Were it so easy
     else
         c1.innerText = encounter[1];
 
@@ -348,9 +356,13 @@ function saveEBook() {
     text += '\t// Name, Notes, Monsters\n';
 
     for (var e = 0; e < Encounters.length; e++) {
-        text += '\t[\'' + Encounters[e][0] + '\', '; // Name
-        text += '\'' + Encounters[e][1] + '\', ';    // Notes
-        text += '\'' + Encounters[e][2] + '\'],\n';  // Monsters
+        text += '\t[\n';
+        text += '\t\t\'' + Encounters[e][0] + '\',\n'; // Name
+
+        text += '\t\t\'' + Encounters[e][1].replace("\n", "\\n") + '\',\n' // Notes
+
+        text += '\t\t\'' + Encounters[e][2] + '\'\n';  // Monsters
+        text += '\t],\n';
     }
     text += ']';
 

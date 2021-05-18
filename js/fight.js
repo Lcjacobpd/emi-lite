@@ -155,11 +155,11 @@ function playEncounter(name) {
         document.getElementById("people").appendChild(element);
     }
 
-    // Populate encounter notes (shown later)
+    // Populate encounter notes
     document.getElementById("enc-note").value = Encounters[row][1]
 
     // Display init page
-    showTab(7, [9]);
+    showTab(7, [9, 10]);
 }
 
 function sortFighters() {
