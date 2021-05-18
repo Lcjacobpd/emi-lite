@@ -157,3 +157,17 @@ search img {
     height: 1.5rem;
     margin: 0.25rem 0.5rem 0 0.5rem;
 }
+
+monster-notes form {
+    margin: 0.5rem 0 0 .5rem;
+    padding: .75rem .75rem 1rem .75rem;
+    border-radius: 0 0 1rem 1rem;
+    background-color: var(--dark-gray);
+}
+
+enc-notes form {
+    margin: 0.5rem 0 0 .5rem;
+    padding: .75rem .75rem 1rem .75rem;
+    border-radius: 0 0 1rem 1rem;
+    background-color: var(--dark-gray);
+}

@@ -129,37 +129,37 @@ function playEncounter(name) {
 
     // Collect players
     for (var p = 0; p < Players.length; p++)
-        Mobs.push(Players[p].slice(0,3).join());
+        Mobs.push(Players[p].slice(0,2).join());
 
     // Collect relevant monsters
     var row = getEncounterID(name);
     var creeps = Encounters[row][2].split(',');
     for (var c = 0; c < creeps.length; c++)
-        Mobs.push("NPC," + creeps[c] + ", ");
+        Mobs.push("NPC," + creeps[c]);
 
     // Populate init page with combatants
     for(var m = 0; m < Mobs.length; m++) {
         var element = document.createElement("box");
         var details = Mobs[m].split(',');
 
-        var pname = document.createElement("P");
-        pname.innerText = details[0];
-        element.appendChild(pname);
+        var name = document.createElement("div");
+        name.style = "display: flex; justify-content: space-between; width: 90%;"
+        name.innerHTML = "<p>" +details[1]+ "</p>";
 
-        var cname = document.createElement("P");
-        cname.innerText = details[1];
-        element.appendChild(cname);
+        // Allow monster details to be examined
+        if (details[0] == "NPC")
+            name.innerHTML += "<img src='img/detail.svg' onclick='viewMonster(\"" +details[1]+ "\")'>";  // Details popup icon
 
-        var cl = document.createElement("P");
-        cl.innerText = details[2];
-        element.appendChild(cl);
-
+        element.appendChild(name);
         element.innerHTML += "<input type='number' id='roll"+m+"' placeholder='roll' style='margin-right: 0;'/>";
         document.getElementById("people").appendChild(element);
     }
 
+    // Populate encounter notes (shown later)
+    document.getElementById("enc-note").value = Encounters[row][1]
+
     // Display init page
-    showTab(7, 8);
+    showTab(7, [9]);
 }
 
 function sortFighters() {
@@ -194,7 +194,7 @@ function sortFighters() {
     // Highlight first/active combatant
     CURRENT = 0;
     document.getElementById("box0").style = ACTIVE_STYLE;
-    showTab(9, 10);
+    showTab(8, [9, 10]);
 }
 
 
@@ -261,7 +261,7 @@ function next() {
     }
 
     // Calculate pool percentage and update display bar
-    var width = 30.0;
+    var width = 22.0;
     pool = Math.round((pool/MON_HP) * width);
 
     if (pool > width)

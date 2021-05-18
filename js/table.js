@@ -308,15 +308,17 @@ function addEncounterRow(encounter) {
     var row = table.insertRow();
 
     // Populate new row
-    for (var c = 0; c < 3; c++) {
-        var cell = row.insertCell();
-        if (c == 2) {
-            cell.innerHTML = "<img src='img/roll.svg' onclick='playEncounter(\"" +encounter[0]+ "\")'><img src='img/minus.svg' onclick='deleteEncounter(\"" +encounter[0]+ "\")'>";
-            break;
-        } else {
-            cell.innerHTML = encounter[c];
-        }
-    }
+    var c0 = row.insertCell();
+    c0.innerText = encounter[0];
+
+    var c1 = row.insertCell();
+    if (encounter[1].length > 60)
+        c1.innerText = encounter[1].substring(0, 117)+"..."; // Hello John
+    else
+        c1.innerText = encounter[1];
+
+    var c2 = row.insertCell();
+    c2.innerHTML = "<img src='img/roll.svg' onclick='playEncounter(\"" +encounter[0]+ "\")'><img src='img/minus.svg' onclick='deleteEncounter(\"" +encounter[0]+ "\")'>";
 }
 
 function getEncounter (name) {

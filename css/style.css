@@ -151,6 +151,9 @@ content {
 
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 content::-webkit-scrollbar {
@@ -248,7 +251,7 @@ right select {
     margin: 0;
 }
 
-right img {
+box img {
     height: 2rem;
     margin: 0.5rem 1rem;
 }
@@ -262,14 +265,24 @@ healthbar {
     border-radius: 8px;
     display: flex;
     margin-top: 1.75rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
     font-weight: bold;
-    border-left: 30rem solid var(--pale-red);
+    border-left: 22rem solid var(--pale-red);
 }
 
 
 fightside {
     width: 50rem;
+}
+
+monster-notes {
+    margin-top: 3rem;
+    width: 42rem;
+}
+
+enc-notes {
+    margin-top: 3rem;
+    width: 42rem;
 }
 
 input:focus, textarea:focus, select:focus{

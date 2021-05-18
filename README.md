@@ -1,7 +1,6 @@
-<img src="img/logo.svg" style="height: 80px">
+<img src="img/logo.svg" alt="logo" style="width: 200px;">
 
-## An Encounter Management Interface
------
+## Encounter Management Interface
 EMI is an encounter management interface I designed for the purpose
 of providing DMs with tools for creating, saving and running
 encounters. Tracking order of actions by initiative, status of each
@@ -61,14 +60,13 @@ your players level up it would be wise to edit and update each one, saving
 the changes to file with the "Save All" button. 
 
 <br/>
-
--------------------------------------------------------------------------------
-
 <br/>
 
-## TODO
-* Additional Functionality
-    * Awaiting feedback
+-----
 
-* Known Bugs
-    * Editing a Player or Monster without saving deletes them
+> ## TODO
+> * Additional Functionality
+>     * Awaiting feedback
+> 
+> * Known Bugs
+>     * Editing a Player or Monster without saving deletes them

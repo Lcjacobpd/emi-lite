@@ -87,14 +87,13 @@
                     <img src="img/roll.svg"/>
                     <label>Roll Initiative</label>
                 </func>
-                <!-- child control tab -->
-                <func id="f8" style="display: none;"></func>
 
-                <func id="f9" onclick="badTab(9)">
+                <func id="f8" onclick="badTab(9)">
                     <img src="img/attack.svg"/>
                     <label>Fight Encounter</label>
                 </func>
-                <!-- child control tab -->
+
+                <func id="f9" style="display: none;"></func>
                 <func id="f10" style="display: none;"></func>
 
             </functions>
@@ -112,8 +111,8 @@
                     <p>Select from Encounters</p>
                 </toast>
 
-                <homepage id="tab0" style="display: block;">
-                    <div style="display: flex; justify-content: space-around; vertical-align: middle; height: 80vh; margin-right: 15%;">
+                <homepage id="tab0" style="display: flex; width: 80%">
+                    <div style="margin: auto;">
                         <img src="img/logo.svg" style="height: 25rem; margin: auto">
                     </div>
                 </homepage>
@@ -340,29 +339,55 @@
                         Roll Initiative
                     </myTitle>           
 
-                    <controls id="tab8" style="display: none;">
-                        <div id="people">
-                            <!-- hold all involved combatants -->
-                        </div>
+                    <div id="people">
+                        <!-- hold all involved combatants -->
+                    </div>
 
-                        <myButton onclick="sortFighters()">
-                            <img src="img/attack.svg">
-                            <text>Fight</text>
-                        </myButton>
-                    </controls>
+                    <r style="width: 50rem;"></r>
+
+                    <myButton onclick="sortFighters()">
+                        <img src="img/attack.svg">
+                        <text>Fight</text>
+                    </myButton>
                 </runencounter>
 
                 
-                <fightencounter id="tab9" style="display: none;">
+                <fightencounter id="tab8" style="display: none;">
                     <myTitle>
                         <img src="img/attack.svg">
                         Fight Encounter
                     </myTitle>
 
-                    <!-- <box>
-                        <left>NPC Zombie</left>
-                        <right> <img src="img/plus.svg"/> <p>12</p> <input type="number"/> <select></select> </right>
-                    </box> -->
+                    <fightside>
+                        <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 1rem; border: none">
+                            <left>Name</left>
+                            <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
+                                <div style="width: 4rem;">AC</div>
+                                <div style="width: 4.25rem;">HP</div>
+                                <div style="width: 9rem;">Status</div>
+                            </right>
+                        </box>
+                        <div id="fighters">
+                            <!-- hold sorted fighters list -->
+                        </div>
+
+                        <r style="width: 50rem;">
+                            <myButton onclick="next()" style="width:7rem">
+                                <img src="img/attack.svg">
+                                <text>Next</text>
+                            </myButton>
+
+                            <mybutton style="width: 12rem" onclick="showChallenger()">
+                                <img src="img/plus.svg"/>
+                                <text>Add Monster</text>
+                            </mybutton>
+
+                            <healthbar id="hpBar"></healthbar>
+                        </r>
+
+                        
+                        
+                    </fightside>
 
                     <challenger id="challenger">
                         <div style="display: flex; flex-direction: row;" onclick="hideChallenger()">
@@ -379,91 +404,69 @@
                         </mybutton>
                     </challenger>
 
-                    <controls id="tab10" style="display: none;">
-                        <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                            <fightside>
-
-                                <mybutton style="width: 12rem" onclick="showChallenger()">
-                                    <img src="img/plus.svg"/>
-                                    <text>Add Monster</text>
-                                </mybutton>
-
-                                <box style="width: 44.1rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 1rem; border: none">
-                                    <left>Name</left>
-                                    <right style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem; width: 75%;">
-                                        <div style="width: 4rem;">AC</div>
-                                        <div style="width: 4.25rem;">HP</div>
-                                        <div style="width: 9rem;">Status</div>
-                                    </right>
-                                </box>
-                                <div id="fighters">
-                                    <!-- hold sorted fighters list -->
-                                </div>
-        
-                                <r style="width: 60rem;">
-                                    <myButton onclick="next()" style="width:7rem">
-                                        <img src="img/attack.svg">
-                                        <text>Next</text>
-                                    </myButton>
-        
-                                    <healthbar id="hpBar"></healthbar>
-                                </r>
-                            </fightside>
-
-
-                            <monster-notes style="margin-top: 3rem; width: 45rem">
-                                <box style="width: 36.5rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
-                                    <left>Monster Details</left>
-                                    <right><img id="preview" src="img/detail.svg" style="height: 1.75rem;"></right>
-                                </box>
-
-                                <form id="monsternotes" style="margin: 0.5rem 0 0 .5rem; padding: .75rem .75rem 1rem .75rem; border-radius: 0 0 1rem 1rem; background-color: var(--dark-gray);">
-                                    <p style="margin: 0; margin-left: 1rem;">Name</p>
-                                    <input type="text" name="name" readonly>
-                                    
-                                    <col2 style="margin-left: 1rem;">
-                                        <p>Armor Class</p>
-                                        <p style="margin-left: 11.5rem;">Heath</p>
-                                    </col2>
-                                    <col2>                         
-                                        <input type="number" name="armor" readonly>
-                                        <input type="number" name="health" readonly>
-                                    </col2>
-            
-                                    <br/>
-            
-                                    <r>
-                                        <p style="margin-left: 1rem;">STR</p>
-                                        <p>DEX</p>
-                                        <p>CON</p>
-                                        <p>INT</p>
-                                        <p>WIZ</p>
-                                        <p>CHA</p>
-                                    </r>
-                                    <r>
-                                        <input type="number" name="str" readonly>
-                                        <input type="number" name="dex" readonly>
-                                        <input type="number" name="con" readonly>
-                                        <input type="number" name="int" readonly>
-                                        <input type="number" name="wiz" readonly>
-                                        <input type="number" name="cha" readonly>
-                                    </r>
-            
-                                    <br/>
-            
-                                    <p style="margin: 0; margin-left: 1rem;">Attacks</p>
-                                    <textarea id="dice-note" readonly></textarea>
-                                    <p style="margin: 0; margin-left: 1rem;">Resistance</p>
-                                    <input type="text" name="res" readonly>
-                                </form>
-
-
-                            </monster-notes>
-
-                        </div>   
-                    </controls>
-
                 </fightencounter>
+
+
+                <monster-notes id="tab9" style="display: none;">
+                    <box style="width: 36.5rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+                        <left>Monster Details</left>
+                        <right><img id="preview" src="img/detail.svg" style="height: 1.75rem;"></right>
+                    </box>
+
+                    <form id="monsternotes">
+                        <p style="margin: 0; margin-left: 1rem;">Name</p>
+                        <input type="text" name="name" readonly>
+                        
+                        <col2 style="margin-left: 1rem;">
+                            <p>Armor Class</p>
+                            <p style="margin-left: 11.5rem;">Heath</p>
+                        </col2>
+                        <col2>                         
+                            <input type="number" name="armor" readonly>
+                            <input type="number" name="health" readonly>
+                        </col2>
+
+                        <br/>
+
+                        <r>
+                            <p style="margin-left: 1rem;">STR</p>
+                            <p>DEX</p>
+                            <p>CON</p>
+                            <p>INT</p>
+                            <p>WIZ</p>
+                            <p>CHA</p>
+                        </r>
+                        <r>
+                            <input type="number" name="str" readonly>
+                            <input type="number" name="dex" readonly>
+                            <input type="number" name="con" readonly>
+                            <input type="number" name="int" readonly>
+                            <input type="number" name="wiz" readonly>
+                            <input type="number" name="cha" readonly>
+                        </r>
+
+                        <br/>
+
+                        <p style="margin: 0; margin-left: 1rem;">Attacks</p>
+                        <textarea id="dice-note" readonly></textarea>
+                        <p style="margin: 0; margin-left: 1rem;">Resistance</p>
+                        <input type="text" name="res" readonly>
+                    </form>
+                </monster-notes>
+
+
+                <enc-notes id="tab10" style="display: none;">
+                    <box style="width: 36.5rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
+                        <left>Encounter Notes</left>
+                        <right><img src="img/notes.svg" style="height: 1.75rem;"></right>
+                    </box>
+
+                    <form>
+                        <textarea id="enc-note" style="height: 28rem;" readonly></textarea>
+                    </form>
+                        
+                </enc-notes>
+
             </content>
 
         </mainbody>
@@ -527,7 +530,7 @@
         return firstArray;
     }
 
-    function showTab(num, kid=-1) {
+    function showTab(num, kids=[]) {
         // Toggle tab visibility.
         selected = "tab" + num;
         for (var x = 0; document.getElementById("tab"+x) != null; x++) {
@@ -540,10 +543,10 @@
             }
         }
 
-        // If present, show child tab.
-        if (kid > -1) {
-            document.getElementById("tab"+kid).style.display = "block";
-        }
+        // If present, show child tabs.
+        if (kids.length > 0)
+            for (var i in kids)
+                document.getElementById("tab"+kids[i]).style.display = "block";
 
         // refresh monster tagbox
         var mons = getFirstArray(MonsterBook);
