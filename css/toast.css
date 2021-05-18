@@ -115,11 +115,11 @@ info p {
 challenger {
   visibility: hidden;
   width: 24rem;
-  height: 29rem;
+  height: 28.25rem;
   position: absolute;
   z-index: 100;
-  left: 19.8rem;
-  top: 8rem;
+  left: 28.35rem;
+  top: 47.5rem;
   background-color: var(--darkest-gray);
   border-radius: 8px;
 }
