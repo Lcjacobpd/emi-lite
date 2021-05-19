@@ -39,6 +39,23 @@
     </info>
 
 
+    <challenger id="challenger">
+        <div style="display: flex; flex-direction: row;" onclick="hideChallenger()">
+            <img style="height: 1.5rem; margin: 0.75rem; margin-left: 1rem;" src="img/minus.svg"/>
+            <div style="margin: 0.75rem 0 1rem 0.26rem; font-size: 1.25rem; font-weight: bold;">Add Monster</div>
+            
+        </div>
+        
+        <div id="monster-ch"></div>
+
+        <mybutton onclick="addMonsters()" style="margin-top: 1rem;">
+            <img src="img/attack.svg" />
+            <text>Insert</text>
+        </mybutton>
+    </challenger>
+    <blackout id="blackout" style="visibility: hidden;"></blackout>
+
+
     <backdrop>
         <ribbon>
             <a onclick="showTab(0)">Encounter Manager</a>
@@ -384,25 +401,7 @@
 
                             <healthbar id="hpBar"></healthbar>
                         </r>
-
-                        
-                        
                     </fightside>
-
-                    <challenger id="challenger">
-                        <div style="display: flex; flex-direction: row;" onclick="hideChallenger()">
-                            <img style="height: 1.5rem; margin: 0.75rem; margin-left: 1rem;" src="img/minus.svg"/>
-                            <div style="margin: 0.75rem 0 1rem 0.26rem; font-size: 1.25rem; font-weight: bold;">Add Monster</div>
-                            
-                        </div>
-                        
-                        <div id="monster-ch"></div>
-
-                        <mybutton onclick="addMonsters()" style="margin-top: 1rem;">
-                            <img src="img/attack.svg" />
-                            <text>Insert</text>
-                        </mybutton>
-                    </challenger>
 
                 </fightencounter>
 
@@ -559,16 +558,15 @@
     }
 
     function showChallenger() {
-        var popup = document.getElementById("challenger");
-        popup.style.visibility = "visible";
+        document.getElementById("challenger").style.visibility = "visible";
+        document.getElementById("blackout").style.visibility = "visible";
 
-        document.getElementById("content").scrollTo(0,0);
         document.getElementById("content").style = "overflow: hidden;";
     }
 
     function hideChallenger() {
-        var popup = document.getElementById("challenger");
-        popup.style.visibility = "hidden";
+        document.getElementById("challenger").style.visibility = "hidden";
+        document.getElementById("blackout").style.visibility = "hidden";
 
         document.getElementById("content").style =  "overflow: scroll;";
     }

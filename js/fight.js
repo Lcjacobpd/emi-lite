@@ -281,6 +281,7 @@ function addMonsters() {
     }
     
     document.getElementById("challenger").style.visibility = "hidden";
+    document.getElementById("blackout").style.visibility = "hidden";
     document.getElementById("content").style =  "overflow: scroll;";
 }
 
