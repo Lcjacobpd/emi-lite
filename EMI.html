@@ -53,7 +53,7 @@
             <text>Insert</text>
         </mybutton>
     </challenger>
-    <blackout id="blackout" style="visibility: hidden;"></blackout>
+    <blackout id="blackout"></blackout>
 
 
     <backdrop>
@@ -461,7 +461,7 @@
                     </box>
 
                     <form>
-                        <textarea id="enc-note" style="height: 28rem;" readonly></textarea>
+                        <textarea id="enc-note" style="height: 28rem;"></textarea>
                     </form>
                         
                 </enc-notes>
@@ -559,14 +559,14 @@
 
     function showChallenger() {
         document.getElementById("challenger").style.visibility = "visible";
-        document.getElementById("blackout").style.visibility = "visible";
+        blackout()
 
         document.getElementById("content").style = "overflow: hidden;";
     }
 
     function hideChallenger() {
         document.getElementById("challenger").style.visibility = "hidden";
-        document.getElementById("blackout").style.visibility = "hidden";
+        document.getElementById("blackout").className = ""
 
         document.getElementById("content").style =  "overflow: scroll;";
     }

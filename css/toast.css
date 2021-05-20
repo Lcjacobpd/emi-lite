@@ -23,7 +23,6 @@
 }
 
 
-
 toast {
   visibility: hidden;
   width: 20rem;
@@ -112,6 +111,23 @@ info p {
   padding-left: 0.5rem;
 }
 
+info.show {
+  visibility: visible;
+  -webkit-animation: appear 0.5s;
+  animation: appear 0.5s;
+}
+
+@-webkit-keyframes appear {
+  from { opacity: 0;} 
+  to { opacity: 1;}
+}
+
+@keyframes appear {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+
 challenger {
   visibility: hidden;
   width: 24rem;
@@ -141,7 +157,9 @@ challenger mybutton:hover {
   transition: 0.25s;
 }
 
+
 blackout {
+  visibility: collapse;
   position: fixed;
   top: 0;
   left: 0;
@@ -151,4 +169,20 @@ blackout {
   background-color: black;
   opacity: 0.75;
   z-index: 50;
+}
+
+blackout.show {
+  visibility: visible;
+  -webkit-animation: darken 0.5s;
+  animation: darken 0.5s;
+}
+
+@-webkit-keyframes darken {
+  from { opacity: 0;} 
+  to { opacity: 0.75;}
+}
+
+@keyframes darken {
+  from { opacity: 0;}
+  to { opacity: 0.75;}
 }
