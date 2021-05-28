@@ -23,7 +23,23 @@ function savePlayer() {
         return;
     }
 
-    // Form is valid, push to variable and add row to table
+    // Form is valid, check for overwrite
+    for (p in Players)
+        if (Players[p][0] == player[0]) {
+            Players[p] = player;
+
+            document.getElementById("playerform").reset();
+            
+            var table = document.getElementById('playerlist').children;
+            var row = table[0].children[1+parseInt(p)];
+            row.remove()
+
+            addPlayerRow(player);
+            reportSaved("player");
+            return
+        }
+
+    // New entry, push to variable and add row to table
     Players.push(player);
     addPlayerRow(player);
 
@@ -71,7 +87,6 @@ function editPlayer(name) {
     form.elements[3].value = player[3];
 
     showTab(1);
-    deletePlayer(name);
 }
 
 function deletePlayer(name) {
@@ -141,9 +156,24 @@ function saveMonster() {
         return;
     }
 
-    // Form is valid, push to variable and add row to table
+    // Form is valid, check for overwrite
+    for (m in MonsterBook)
+        if (MonsterBook[m][0] == monster[0]) {
+            MonsterBook[m] = monster;
+
+            document.getElementById("monsterform").reset();
+
+            var table = document.getElementById('monsterlist').children;
+            var row = table[0].children[1+parseInt(m)];
+            row.remove()
+
+            addMonsterRow(monster);
+            reportSaved("monster");
+            return
+        }
+
+    // New entry, push to variable and add row to table
     MonsterBook.push(monster);
-    console.log(MonsterBook)
     addMonsterRow(monster);
 
     document.getElementById("monsterform").reset();
@@ -198,7 +228,6 @@ function editMonster(name) {
     form.elements[11].value = monster[11];
 
     showTab(2);
-    deleteMonster(name);
 }
 
 function deleteMonster(name) {

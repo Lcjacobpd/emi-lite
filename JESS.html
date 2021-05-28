@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/vars/spellbook.js"></script>
+    <script type="text/javascript" src="js/table.js"></script>
+    <script type="text/javascript" src="js/tagbox.js"></script>
+    <script type="text/javascript" src="js/toast.js"></script>
+    <script type="text/javascript" src="js/spell.js"></script>
+
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/tagbox.css">
+    <link rel="stylesheet" href="css/spell.css">
+
+    
+
+    <info id="pop1">
+        <div>Contact Info</div>
+        <p>
+            Thank you for using my enhanced spellbook interface.
+            Please feel free to contact with questions and critiques.
+            <br/><br/>
+            Github: <a href="https://github.com/Lcjacobpd/emi" style="color: #b9bbbe;">Lcjacobpd/emi</a>
+        </p>
+    </info>
+
+    <info id="pop2">
+        <div>Project Details</div>
+        <p>
+            Part of this project relies on
+            <a href="https://github.com/jbt/tagbox" style="color: #b9bbbe;">jbt's Tagbox</a>
+            js implimentation with a modified stylesheet.
+            <br/><br/>
+            This project's style is not so subtly inspired by discord.
+        </p>
+    </info>
+
+    <addspell id="addspell">
+        <form id="spellform">
+            <myTitle>
+                <img src="img/spell_book.svg">
+                Enter Spell Details
+            </myTitle>
+    
+            <br/>
+            <input type="text" name="name" placeholder="Name" style="width: 34rem;">            
+            <br/>
+
+            <div id="classes"></div>
+            <br/>
+
+            <row>
+                <select name="magic-type">
+                    <option>Abjuration</option>
+                    <option>Conjuration</option>
+                    <option>Divination</option>
+                    <option>Enchantment</option>
+                    <option>Evocation</option>
+                    <option>Illusion</option>
+                    <option>Necromancy</option>
+                    <option>Transmutation</option>
+                </select>
+
+                <select name="casting-time">
+                    <option>Action</option>
+                    <option>Bonus Action</option>
+                    <option>Reaction</option>
+                </select>
+    
+                <select name="roll-type">
+                    <option>Attack</option>
+                    <option>Save</option>
+                </select>
+            </row>
+    
+            <row>
+                <input type="number" name="level" placeholder="Level">
+                <input type="number" name="range" placeholder="Range (ft)">
+                <input type="text" name="duration" placeholder="Duration">
+            </row>
+
+            <br/>
+
+            <row>
+                <div id="components"></div>
+            </row>
+
+            <br/>
+
+            <textarea placeholder="Description" name="description"></textarea>
+                    
+            <row>
+                <label for="concentration">Concentration</label>
+                <input type="checkbox" name="concentration">
+                <label for="ritual">Ritual</label>
+                <input type="checkbox" name="ritual">
+            </row>
+
+        </form>
+
+        <mybutton style="margin-left: 27rem;" onclick="saveSpell()">
+            <img src="img/plus.svg">
+            <text>Save</text>
+        </mybutton>
+
+    </addspell>
+    <blackout id="blackout" onclick="hideAddSpell()"></blackout>
+
+
+    <backdrop>
+        <ribbon>
+            <a onclick="showTab(0)">Spell Search</a>
+            <div style="display:flex;">
+                <img src="img/message.svg" onclick="showPop(1)">
+                <img src="img/setting.svg" onclick="showPop(2)">
+            </div>
+        </ribbon>
+
+        <mainbody>
+            <functions style="width: 2.5rem;"></functions>
+
+            <content id="content" onscroll="addFade()">
+                <div id="fade" style="transition: 0.25s; position: absolute; background-image: linear-gradient(#36393f, transparent); height: .1rem; width: 80%;"></div>
+
+                <toast id="formerror">
+                    <img src="img/warn.svg">
+                    <p>Incomplete form</p>
+                </toast>
+
+                <toast id="spellsaved">
+                    <img src="img/spell_book.svg">
+                    <p>Spell saved to book</p>
+                </toast>
+
+                <!-- ------------------------------------------------------------ -->
+
+                <spellboook id="tab0">
+                    <myTitle>
+                        <img src="img/spell_book.svg">
+                        Spell Book
+                    </myTitle>
+
+                    <r>
+                        <myButton onclick="showAddSpell()">
+                            <img src="img/plus.svg">
+                            <text>Add New</text>                     
+                        </myButton>
+    
+                        <myButton onclick="saveMBook()">
+                            <img src="img/download.svg">
+                            <text>Save All</text>
+                        </myButton>
+
+                        <search>
+                            <img src="img/detail.svg">
+                            <input type="text" id="search" onkeyup="searchMonsters()" placeholder="Search by name.." autocomplete="off">
+                        </search>
+                    </r>
+
+                    <br/>
+
+                    <table id="spelllist" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th style="width: 15%">Name</th>
+                            <th style="width: 25%">Classes</th>
+                            <th style="width: 15%">Magic Type</th>
+                            <th style="width: 10%">Roll Type</th>
+                            <th style="width: 5%">Level</th>
+                            <th style="width: 10%">Range</th>
+                            <th style="width: 12%">Components</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </spellbook>
+
+
+                
+
+            </content>
+
+        </mainbody>
+    </backdrop>
+    
+</html>
+
+<script>
+    var Classes = [
+        'Barbarian',
+        'Bard',
+        'Cleric',
+        'Druid',
+        'Fighter',
+        'Monk',
+        'Paladin',
+        'Ranger',
+        'Rogue',
+        'Sorcerer',
+        'Warlock',
+        'Wizard'
+    ]
+
+    var Components = [
+        'visual',
+        'semantic',
+        'material'
+    ]
+
+
+    function addFade() {
+        var fade = document.getElementById("fade");
+        var offset = document.getElementById("content").scrollTop;
+        
+        if(offset > 50) {
+            fade.style.height = "3rem";        
+        } else {
+            fade.style.height = "0.25rem";
+        }
+    }
+
+    //First time page load function.
+    window.onload = function() {
+        // Populate spell table.
+        //for(var i = 0; i < SpellBook.length; i++) {
+        //    var spell = SpellBook[i];
+        //    addSpellRow(spell);
+        //}
+
+        // character classes tagbox
+        $('#classes').tagbox({
+            allowDuplicates: false,
+            items: Classes,
+        });
+
+        document.getElementsByClassName('tagbox-wrapper')[0].firstChild.placeholder = "Classes"
+
+        // challanger monster tagbox
+        $('#components').tagbox({
+            allowDuplicates: false,
+            maxItems: 3,
+            items: Components,
+        });
+
+        document.getElementsByClassName('tagbox-wrapper')[1].firstChild.placeholder = "Components"
+    }
+
+    // Create array of first items in nested array
+    function getFirstArray(array){
+        var firstArray = []
+        for (var i = 0; i < array.length; i++) 
+            firstArray.push(array[i][0]);
+        
+        return firstArray;
+    }
+
+    function showTab(num, kids=[]) {
+        // Toggle tab visibility.
+        selected = "tab" + num;
+        for (var x = 0; document.getElementById("tab"+x) != null; x++) {
+            if ("tab"+x == selected) {
+                document.getElementById("tab"+x).style.display = "block";
+                document.getElementById("f"+x).style.backgroundColor = "#40444b";
+            } else {
+                document.getElementById("tab"+x).style.display = "none";
+                document.getElementById("f"+x).style.backgroundColor = "";
+            }
+        }
+
+        // If present, show child tabs.
+        if (kids.length > 0)
+            for (var i in kids)
+                document.getElementById("tab"+kids[i]).style.display = "block";
+    }
+
+    function showAddSpell() {
+        document.getElementById("addspell").style.visibility = "visible";
+        blackout()
+
+        document.getElementById("content").style = "overflow: hidden;";
+    }
+
+    function hideAddSpell() {
+        document.getElementById("addspell").style.visibility = "hidden";
+        document.getElementById("blackout").className = ""
+
+        document.getElementById("content").style =  "overflow: scroll;";
+    }
+</script>
