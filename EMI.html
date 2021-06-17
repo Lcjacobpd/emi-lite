@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/tagbox.css">
-    
+
 
     <info id="pop1">
         <div>Contact Info</div>
@@ -43,9 +43,9 @@
         <div style="display: flex; flex-direction: row;" onclick="hideChallenger()">
             <img style="height: 1.5rem; margin: 0.75rem; margin-left: 1rem;" src="img/minus.svg"/>
             <div style="margin: 0.75rem 0 1rem 0.26rem; font-size: 1.25rem; font-weight: bold;">Add Monster</div>
-            
+
         </div>
-        
+
         <div id="monster-ch"></div>
 
         <mybutton onclick="addMonsters()" style="margin-top: 1rem;">
@@ -189,7 +189,7 @@
                             <option value="stunned">stunned</option>
                             <option value="unconscious">unconscious</option>
                         </select>
-                        <col2>                            
+                        <col2>
                             <input type="number" name="armor" placeholder="Armor Class">
                             <input type="number" name="health" placeholder="Health">
                         </col2>
@@ -259,9 +259,9 @@
                     <r>
                         <myButton onclick="showTab(1)">
                             <img src="img/plus.svg">
-                            <text>Add New</text>                     
+                            <text>Add New</text>
                         </myButton>
-    
+
                         <myButton onclick="savePBook()">
                             <img src="img/download.svg">
                             <text>Save All</text>
@@ -291,9 +291,9 @@
                     <r>
                         <myButton onclick="showTab(2)">
                             <img src="img/plus.svg">
-                            <text>Add New</text>                     
+                            <text>Add New</text>
                         </myButton>
-    
+
                         <myButton onclick="saveMBook()">
                             <img src="img/download.svg">
                             <text>Save All</text>
@@ -328,7 +328,7 @@
                     <r>
                         <myButton onclick="showTab(3)">
                             <img src="img/plus.svg">
-                            <text>Add New</text>                     
+                            <text>Add New</text>
                         </myButton>
 
                         <myButton onclick="saveEBook()">
@@ -354,7 +354,7 @@
                     <myTitle>
                         <img src="img/roll.svg">
                         Roll Initiative
-                    </myTitle>           
+                    </myTitle>
 
                     <div id="people">
                         <!-- hold all involved combatants -->
@@ -368,7 +368,7 @@
                     </myButton>
                 </runencounter>
 
-                
+
                 <fightencounter id="tab8" style="display: none;">
                     <myTitle>
                         <img src="img/attack.svg">
@@ -402,7 +402,6 @@
                             <healthbar id="hpBar"></healthbar>
                         </r>
                     </fightside>
-
                 </fightencounter>
 
 
@@ -415,12 +414,12 @@
                     <form id="monsternotes">
                         <p style="margin: 0; margin-left: 1rem;">Name</p>
                         <input type="text" name="name" readonly>
-                        
+
                         <col2 style="margin-left: 1rem;">
                             <p>Armor Class</p>
                             <p style="margin-left: 11.5rem;">Heath</p>
                         </col2>
-                        <col2>                         
+                        <col2>
                             <input type="number" name="armor" readonly>
                             <input type="number" name="health" readonly>
                         </col2>
@@ -456,30 +455,29 @@
 
                 <enc-notes id="tab10" style="display: none;">
                     <box style="width: 36.5rem; background-color:#202225; border-radius: 8px 8px 0 0; margin-top: 2.5rem; border: none">
-                        <left>Encounter Notes</left>
+                        <left id='enc-title'>Encounter Notes</left>
                         <right><img src="img/notes.svg" style="height: 1.75rem;"></right>
                     </box>
 
                     <form>
                         <textarea id="enc-note" style="height: 28rem;"></textarea>
                     </form>
-                        
                 </enc-notes>
 
             </content>
 
         </mainbody>
     </backdrop>
-    
+
 </html>
 
 <script>
     function addFade() {
         var fade = document.getElementById("fade");
         var offset = document.getElementById("content").scrollTop;
-        
+
         if(offset > 50) {
-            fade.style.height = "3rem";        
+            fade.style.height = "3rem";
         } else {
             fade.style.height = "0.25rem";
         }
@@ -523,9 +521,9 @@
     // Create array of first items in nested array
     function getFirstArray(array){
         var firstArray = []
-        for (var i = 0; i < array.length; i++) 
+        for (var i = 0; i < array.length; i++)
             firstArray.push(array[i][0]);
-        
+
         return firstArray;
     }
 

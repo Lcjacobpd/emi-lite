@@ -9,7 +9,7 @@ To use EMI, simply open in your browser of choice.
 <br/>
 
 ## Getting Started
-Setting up an encounter is fairly straightforward; first double 
+Setting up an encounter is fairly straightforward; first double
 check that the monsters you're going to use can be found in the
 Monster Book table. If you needed to add new monsters to the book,
 be sure to save over the existing ```js/vars/monsterbook.js``` with
@@ -55,7 +55,7 @@ modified arbitrarily.
 ## Outside Encounters
 Presently, each players health resets at the start of every encounter. As
 your players level up it would be wise to edit and update each one, saving
-the changes to file with the "Save All" button. 
+the changes to file with the "Save All" button.
 
 <br/>
 <br/>

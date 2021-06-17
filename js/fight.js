@@ -51,14 +51,14 @@ function addMonFighter(m, offset=0) {
         var names = Mobs[m].split(',');
         var mon = getMonster(names[1]);
     }
-        
+
     else {
         var names = Challengers[m];
         var mon = getMonster(names);
     }
 
     var num = Number(m) + offset;
-    
+
 
     // Setup html elements
     var element = document.createElement("box");
@@ -72,7 +72,7 @@ function addMonFighter(m, offset=0) {
     left.innerHTML = "NPC " + mon[0];
     right.innerHTML = "<img src='img/detail.svg' onclick='viewMonster(\"" +mon[0]+ "\")'>";  // Details popup icon
     right.innerHTML += '<p>' + mon[2] + '</p>'; // AC
-    
+
     hp.value = mon[3];
     hp.id = "hp"+num;
     MON_HP += mon[3];
@@ -103,7 +103,7 @@ function addPlrFighter(m) {
     var perp = getPlayer(details[0]);
 
     left.innerHTML = perp[0] +" "+ perp[1];
-    
+
     hp.value = perp[3];
     hp.id = "hp"+m;
     right.appendChild(hp);
@@ -156,7 +156,9 @@ function playEncounter(name) {
     }
 
     // Populate encounter notes
-    document.getElementById("enc-note").value = Encounters[row][1]
+    enc = Encounters[row]
+    document.getElementById("enc-title").innerText = enc[0]
+    document.getElementById("enc-note").value = enc[1]
 
     // Display init page
     showTab(7, [9, 10]);
@@ -191,6 +193,10 @@ function sortFighters() {
             addPlrFighter(m);
     }
 
+    // Save changes to encounter notes.
+    row = getEncounterID(document.getElementById("enc-title").innerText)
+    Encounters[row][1] = document.getElementById("enc-note").value
+
     // Highlight first/active combatant
     CURRENT = 0;
     document.getElementById("box0").style = ACTIVE_STYLE;
@@ -199,7 +205,7 @@ function sortFighters() {
 
 
 /**********************
- * During up a Fight
+ * During a Fight
  *********************/
 
 function next() {
@@ -215,7 +221,7 @@ function next() {
         // Prevent infinite loop
         if (pos == CURRENT)
             break;
-        
+
         // Skip if dead
         var stat = document.getElementById("st"+CURRENT).value;
         var hp = document.getElementById("hp"+CURRENT).value;
@@ -224,7 +230,7 @@ function next() {
         else
             break;
     }
-    
+
     // Update styles by status
     var pool = 0;
     for (var m in Mobs) {
@@ -245,8 +251,8 @@ function next() {
                 document.getElementById("st"+m).value = "unconscious";
             }
         }
-        
-        // Unconscious case 
+
+        // Unconscious case
         if (stat == "unconscious")
             document.getElementById("box"+m).style = KO_STYLE;
 
@@ -257,7 +263,7 @@ function next() {
         // Calculate monster health pool
         if (document.getElementById("box"+m).children[1].children.length == 4)
             pool += parseInt(document.getElementById('hp'+m).value);
-            
+
     }
 
     // Calculate pool percentage and update display bar
@@ -279,7 +285,7 @@ function addMonsters() {
         Mobs.push("NPC," + Challengers[m] + ", ");
         addMonFighter(m, offset);
     }
-    
+
     document.getElementById("challenger").style.visibility = "hidden";
     document.getElementById("blackout").style.visibility = "hidden";
     document.getElementById("content").style =  "overflow: scroll;";
@@ -288,7 +294,7 @@ function addMonsters() {
 
 function viewMonster(name) {
     var monster = getMonster(name);
-            
+
     var form = document.getElementById("monsternotes");
     form.elements[0].value = monster[0];
     //form.elements[1].value = monster[1]; Status Not Displayed

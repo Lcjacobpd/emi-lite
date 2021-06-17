@@ -108,7 +108,7 @@ function getSpellID(name) {
 
 function editSpell(name) {
     var spell = getSpell(name);
-            
+
     var form = document.getElementById("spellform");
     form.elements[0].value = spell[0];
     form.elements[1].value = spell[1];
@@ -128,7 +128,7 @@ function editSpell(name) {
 
 function deleteSpell(name) {
     var row = getSpellID(name);
-    
+
     // Delete page and variable representation
     document.getElementById('spelllist').deleteRow(row + 1);
     SpellBook.splice(row, 1);
@@ -153,7 +153,7 @@ function saveMBook() {
         text += SpellBook[m][7] + ', '; // INT
         text += SpellBook[m][8] + ', '; // WIZ
         text += SpellBook[m][9] + ', \n'; // CHA
-        
+
         text += '\t\t\'' + SpellBook[m][10].replace("\n", "\\n") + '\',\n'; // Attacks
         text += '\t\t\'' + SpellBook[m][11] + '\'\n\t],\n';
     }

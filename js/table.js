@@ -29,7 +29,7 @@ function savePlayer() {
             Players[p] = player;
 
             document.getElementById("playerform").reset();
-            
+
             var table = document.getElementById('playerlist').children;
             var row = table[0].children[1+parseInt(p)];
             row.remove()
@@ -79,7 +79,7 @@ function getPlayerID(name) {
 
 function editPlayer(name) {
     var player = getPlayer(name);
-            
+
     var form = document.getElementById("playerform");
     form.elements[0].value = player[0];
     form.elements[1].value = player[1];
@@ -212,7 +212,7 @@ function getMonsterID(name) {
 
 function editMonster(name) {
     var monster = getMonster(name);
-            
+
     var form = document.getElementById("monsterform");
     form.elements[0].value = monster[0];
     form.elements[1].value = monster[1];
@@ -232,7 +232,7 @@ function editMonster(name) {
 
 function deleteMonster(name) {
     var row = getMonsterID(name);
-    
+
     // Delete page and variable representation
     document.getElementById('monsterlist').deleteRow(row + 1);
     MonsterBook.splice(row, 1);
@@ -257,7 +257,7 @@ function saveMBook() {
         text += MonsterBook[m][7] + ', '; // INT
         text += MonsterBook[m][8] + ', '; // WIZ
         text += MonsterBook[m][9] + ', \n'; // CHA
-        
+
         text += '\t\t\'' + MonsterBook[m][10].replace("\n", "\\n") + '\',\n'; // Attacks
         text += '\t\t\'' + MonsterBook[m][11] + '\'\n\t],\n';
     }
@@ -329,7 +329,7 @@ function saveEncounter() {
     Encounters.push(encounter);
     addEncounterRow(encounter);
 
-    document.getElementById("encounterform").reset(); 
+    document.getElementById("encounterform").reset();
     reportSaved("encounter");
 }
 
