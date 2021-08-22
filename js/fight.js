@@ -294,18 +294,81 @@ function addMonsters() {
 
 function viewMonster(name) {
     var monster = getMonster(name);
-
     var form = document.getElementById("monsternotes");
+
     form.elements[0].value = monster[0];
     //form.elements[1].value = monster[1]; Status Not Displayed
     form.elements[1].value = monster[2];
     form.elements[2].value = monster[3];
-    form.elements[3].value = monster[4];
-    form.elements[4].value = monster[5];
-    form.elements[5].value = monster[6];
-    form.elements[6].value = monster[7];
-    form.elements[7].value = monster[8];
-    form.elements[8].value = monster[9];
+
+    //Show ability scores with modifiers
+    for (var m = 4; m < 10; m++){
+        let n = m-1
+        switch(monster[m]) {
+            case 1:
+                form.elements[n].value = monster[m] + ' (-5)';
+                break;
+            case 2:
+            case 3:
+                form.elements[n].value = monster[m] + ' (-4)';
+                break;
+            case 4:
+            case 5:
+                form.elements[n].value = monster[m] + ' (-3)';
+                break;
+            case 6:
+            case 7:
+                form.elements[n].value = monster[m] + ' (-2)';
+                break;
+            case 8:
+            case 9:
+                form.elements[n].value = monster[m] + ' (-1)';
+                break;
+            case 10:
+            case 11:
+                form.elements[n].value = monster[m] + ' (0)';
+                break;
+            case 12:
+            case 13:
+                form.elements[n].value = monster[m] + ' (+1)';
+                break;
+            case 14:
+            case 15:
+                form.elements[n].value = monster[m] + ' (+2)';
+                break;
+            case 16:
+            case 17:
+                form.elements[n].value = monster[m] + ' (+3)';
+                break;
+            case 18:
+            case 19:
+                form.elements[n].value = monster[m] + ' (+4)';
+                break;
+            case 20:
+            case 21:
+                form.elements[n].value = monster[m] + ' (+5)';
+                break;
+            case 22:
+            case 23:
+                form.elements[n].value = monster[m] + ' (+6)';
+                break;
+            case 24:
+            case 25:
+                form.elements[n].value = monster[m] + ' (+7)';
+                break;
+            case 26:
+            case 27:
+                form.elements[n].value = monster[m] + ' (+8)';
+                break;
+            case 28:
+            case 29:
+                form.elements[n].value = monster[m] + ' (+9)';
+                break;
+            case 30:
+                form.elements[n].value = monster[m] + ' (+10)';
+                break;
+        }
+    }
     form.elements[9].value = monster[10];
     form.elements[10].value = monster[11];
 

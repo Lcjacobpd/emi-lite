@@ -85,24 +85,36 @@
             <br/>
 
             <row>
-                <div id="components"></div>
+                <label class="container">Visual
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Semantic
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Material
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+            </row>
+            <row>
+                <label class="container">Ritual
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">Concentration
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
             </row>
 
             <br/>
 
             <textarea placeholder="Description" name="description"></textarea>
-                    
-            <row>
-                <label for="concentration">Concentration</label>
-                <input type="checkbox" name="concentration">
-                <label for="ritual">Ritual</label>
-                <input type="checkbox" name="ritual">
-            </row>
-
         </form>
 
         <mybutton style="margin-left: 27rem;" onclick="saveSpell()">
-            <img src="img/plus.svg">
             <text>Save</text>
         </mybutton>
 

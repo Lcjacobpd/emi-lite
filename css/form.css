@@ -121,12 +121,12 @@ myButton text {
 }
 
 r input {
-    width: 3rem;
+    width: 4rem;
 }
 
 r p {
     margin: 0;
-    margin-left: 3rem;
+    margin-left: 4rem;
 }
 
 search {
