@@ -4,7 +4,7 @@ of providing DMs with tools for creating, saving and running
 encounters. Tracking order of actions by initiative, status of each
 involved creature and their ability scores.
 
-To use EMI, simply open in your browser of choice.
+To use EMI, simply open ```EMI.html``` in your browser of choice.
 
 <br/>
 
@@ -63,5 +63,9 @@ the changes to file with the "Save All" button.
 -----
 
 > ## TODO
+> * Allow for player selection on initiative roll
+>     * Not all entered players may be present
+> * Bring total players' health bar back
+>     * For comparison with total monsters' health
 > * Additional Functionality
 >     * Awaiting feedback
