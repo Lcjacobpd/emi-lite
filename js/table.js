@@ -258,7 +258,7 @@ function saveMBook() {
         text += MonsterBook[m][8] + ', '; // WIZ
         text += MonsterBook[m][9] + ', \n'; // CHA
 
-        text += '\t\t\'' + MonsterBook[m][10].split('\n').join('\\n') + '\',\n'; // Attacks
+        text += '\t\t\'' + MonsterBook[m][10].split('\n').join('\\n').replace(/\\?'/i, "\\'") + '\',\n'; // Attacks
         text += '\t\t\'' + MonsterBook[m][11] + '\'\n\t],\n';
     }
     text += ']';
@@ -391,7 +391,7 @@ function saveEBook() {
         text += '\t[\n';
         text += '\t\t\'' + Encounters[e][0] + '\',\n'; // Name
 
-        text += '\t\t\'' + Encounters[e][1].split('\n').join('\\n') + '\',\n' // Notes
+        text += '\t\t\'' + Encounters[e][1].split('\n').join('\\n').replace(/\\?'/i, "\\'") + '\',\n' // Notes
 
         text += '\t\t\'' + Encounters[e][2] + '\'\n';  // Monsters
         text += '\t],\n';
