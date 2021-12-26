@@ -100,9 +100,9 @@ function savePBook() {
     text += '\t// Player Name, Character Name, Class, HP\n'
 
     for (var p = 0; p < Players.length; p++) {
-        text += '\t[\'' + Players[p][0] + '\', '; // Player name
-        text += '\'' + Players[p][1] + '\', ';    // Character name
-        text += '\'' + Players[p][2] + '\', ';    // Class
+        text += '\t[`' + Players[p][0] + '`, '; // Player name
+        text += '`' + Players[p][1] + '`, ';    // Character name
+        text += '`' + Players[p][2] + '`, ';    // Class
         text += Players[p][3] + '], \n';         // HP
     }
     text += ']'
@@ -244,8 +244,8 @@ function saveMBook() {
 
     for (var m = 0; m < MonsterBook.length; m++) {
         text += '\t[\n';
-        text += '\t\t\'' + MonsterBook[m][0] + '\', \n';
-        text += '\t\t\'' + MonsterBook[m][1] + '\', \n';
+        text += '\t\t`' + MonsterBook[m][0] + '`, \n';
+        text += '\t\t`' + MonsterBook[m][1] + '`, \n';
 
         text += '\t\t' + MonsterBook[m][2] + ', '; // AC
         text += MonsterBook[m][3] + ', '; // HP
@@ -258,8 +258,8 @@ function saveMBook() {
         text += MonsterBook[m][8] + ', '; // WIZ
         text += MonsterBook[m][9] + ', \n'; // CHA
 
-        text += '\t\t\'' + MonsterBook[m][10].split('\n').join('\\n').replace(/\\?'/i, "\\'") + '\',\n'; // Attacks
-        text += '\t\t\'' + MonsterBook[m][11] + '\'\n\t],\n';
+        text += '\t\t`' + MonsterBook[m][10].split('\n').join('\\n') + '`,\n'; // Attacks
+        text += '\t\t`' + MonsterBook[m][11] + '`\n\t],\n';
     }
     text += ']';
 
@@ -389,11 +389,11 @@ function saveEBook() {
 
     for (var e = 0; e < Encounters.length; e++) {
         text += '\t[\n';
-        text += '\t\t\'' + Encounters[e][0] + '\',\n'; // Name
+        text += '\t\t`' + Encounters[e][0] + '`,\n'; // Name
 
-        text += '\t\t\'' + Encounters[e][1].split('\n').join('\\n').replace(/\\?'/i, "\\'") + '\',\n' // Notes
+        text += '\t\t`' + Encounters[e][1].split('\n').join('\\n') + '`,\n' // Notes
 
-        text += '\t\t\'' + Encounters[e][2] + '\'\n';  // Monsters
+        text += '\t\t`' + Encounters[e][2] + '`\n';  // Monsters
         text += '\t],\n';
     }
     text += ']';
